@@ -1,16 +1,19 @@
 <!DOCTYPE html>
 <html style="height: 100%">
 <head>
-	<title>Why Go Alone?</title>
 
+	<title>Why Go Alone?</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<script src="assets/javascript/app.js"></script>
-
-
 </head>
 <body style="height: 100%">
 	<div style="height: 100%" id="map"></div>
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6as3rvHxfYoYeZ00Qk-6hFyY0qm0LQGc&libraries=places&callback=initMap"
     async defer></script>
+<!--GEOLOCATION HTML-->
+<p><button onclick="geoFindMe()">Show my location</button></p>
+<div id="out"></div>
+
+
 </body>
 </html>
