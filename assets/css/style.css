@@ -1,8 +1,12 @@
-/*GEOLOCATION CSS
-*/body {
-  padding: 20px;
-  background-color:#ffffc9
+body {
+    padding: 20px;
+    background-color: #ffffc9;
 }
 
-p { margin : 0; }
-/*END GEOLOCATION CSS*/
+p {
+    margin: 0;
+}
+
+.colorButton {
+    background-color: red;
+}
