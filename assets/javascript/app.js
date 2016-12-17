@@ -2,7 +2,7 @@
     var infowindow;
     //need to ask user for this
     var userRadius;
-    var interest = "pizza";
+    var interest = "top golf";
     var keyword;
     //plug user location in here
     // var latitude = 30.4704588;
@@ -32,7 +32,7 @@
 
         var request = {
             location: user,
-            radius: '500',
+            radius: '5000000',
             query: interest
         };
 
@@ -48,6 +48,7 @@
         if (status === google.maps.places.PlacesServiceStatus.OK) {
             for (var i = 0; i < results.length; i++) {
                 createMarker(results[i]);
+                console.log(results[i]);
             }
         }
     }
@@ -58,7 +59,6 @@
             map: map,
             position: place.geometry.location
         });
-
         google.maps.event.addListener(marker, 'click', function() {
             //can put yelp reults in the bubble here
             infowindow.setContent(place.name);
