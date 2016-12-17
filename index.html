@@ -34,62 +34,17 @@
                     </div>
                 </div>
                 <div class="panel panel-default">
-                	<div class="panel-heading">Name your activity</div>
-                	<div class="panel-body">
-                	<form id="interestForm">
-                		<div class="form-group">
-                			<label for="interestInput"><h4>Add an interest</h4></label>
-                			<input type="text" id="interestInput" class="form-control" placeholder="add an Interest">
-                			<br>
-                			<input id="addInterest" type="submit" value="ADD">
-                		</div>
-                	</form>
-                		
-                	</div>
-                </div>
-                <!--GEOLOCATION HTML-->
-                <p>
-                    <button id="geoFindMe">Show my location</button>
-                </p>
-                <div id="out"></div>
-                <!-- Adding Facebook login -->
-                <div class="fb-like" data-share="true" data-width="450" data-show-faces="true">
-                </div>
-                <div class="fb-login-button" data-max-rows="1" data-size="medium" data-show-faces="false" data-auto-logout-link="false"></div>
-                <div id="fb-root"></div>
-                <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
-                </fb:login-button>
-                <div id="status">
-                </div>
-                <button id="myFacebookLogin">Login with Facebook</button>
-                <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
-                </fb:login-button>
-                <div id="status">
-                </div>
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-3">
-                <div class="panel panel-default">
-                    <div class="panel-heading">What I want to do</div>
-                    <div class="panel-body">
-                        <div class="btn-group-vertical" role="activities" aria-label="...">
-                            <button type="button" class="btn btn-default">Pizza</button>
-                            <button type="button" class="btn btn-default">Movie</button>
-                            <button type="button" class="btn btn-default">Bowling</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="panel panel-default">
                     <div class="panel-heading">Name your activity</div>
                     <div class="panel-body">
-                        <div class="btn-group-vertical" role="activities" aria-label="...">
+                        <form id="interestForm">
                             <div class="form-group">
-                                <label for="nameActivities">You Name it:</label>
-                                <input type="text" class="form-control" id="nameActivities">
+                                <label for="interestInput">
+                                    <h4>Add an interest</h4></label>
+                                <input type="text" id="interestInput" class="form-control" placeholder="add an Interest">
                                 <br>
-                                <button type="button" class="btn btn-default">Add</button>
+                                <input id="addInterest" type="submit" value="ADD">
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
                 <!--GEOLOCATION HTML-->
