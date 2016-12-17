@@ -84,11 +84,6 @@
         navigator.geolocation.getCurrentPosition(success, error);
     }
 
-
-    $("#myFacebookLogin").on("click", function(event) {
-        myFacebookLogin();
-    });
-
     $("#geoFindMe").on("click", function(event) {
         geoFindMe();
         console.log("Calling Functions");
