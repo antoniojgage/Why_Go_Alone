@@ -33,6 +33,7 @@
         var request = {
             location: user,
             radius: '500',
+            // keyword: interest,
             query: interest
         };
 
@@ -41,12 +42,13 @@
 
         infowindow = new google.maps.InfoWindow();
         var service = new google.maps.places.PlacesService(map);
-        service.nearbySearch(request, callback);
+        // service.nearbySearch(request, callback);
+        service.textSearch(request, callback);
     }
 
     function callback(results, status) {
         if (status === google.maps.places.PlacesServiceStatus.OK) {
-            for (var i = 0; i < results.length; i++) {
+            for (var i = 0; i < 3; i++) {
                 createMarker(results[i]);
             }
         }
