@@ -5,12 +5,12 @@ var userRadius;
 var interest = "pizza";
 var keyword;
 //plug user location in here
-var lat;
-var lng;
-var user = { lat: lat, lng: lng };
+var latitude= 30.4704588;
+var longitude=-97.68593229999999;
+var user = { lat: latitude, lng: longitude };
 
 var queryURL = "https://api.yelp.com/v2/search?term=" + interest + "&location=" + user;
-
+console.log(queryURL);
 $.ajax({ url: queryURL, method: "GET" }).done(function(response) {
   console.log(response);
 });
@@ -68,9 +68,10 @@ function geoFindMe() {
   function success(position) {
     var latitude  = position.coords.latitude;
     var longitude = position.coords.longitude;
-
+    console.log(latitude);
+    console.log(longitude);
     output.innerHTML = '<p>Latitude is ' + latitude + '° <br>Longitude is ' + longitude + '°</p>';
-
+ 
     var img = new Image();
     img.src = "https://maps.googleapis.com/maps/api/staticmap?center=" + latitude + "," + longitude + "&zoom=13&size=300x300&sensor=false";
 
