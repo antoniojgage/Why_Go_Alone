@@ -1,14 +1,102 @@
 <!DOCTYPE html>
 <html style="height: 100%">
-<head>
-	<title></title>
-	
-	<script src="test.js"></script>
 
+<head>
+    <meta charset="=utf-8">
+    <!-- Latest compiled and minified CSS -->
+    <!--Simple bootstrap style for easier layout -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- CSS link -->
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <!-- Firebase Reference -->
+    <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+    <!-- Link to Moment.js should go here -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script>
+    <title>Train Scheduler</title>
+    <script src="assets/javascript/app.js"></script>
 </head>
-<body style="height: 100%">
+
+<body>
+    <div class="cotainer">
+        <div class="jumbotron" style="background-color: #fe5d26; color: #2e382e">
+            <h1 class="text-center"><strong> Why Go Alone??? </strong></h1>
+        </div>
+    </div>
+    <!-- panel & main body -->
+    <div class ="container">
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="panel panel-default">
+                <div class="panel-heading">What I want to do</div>
+                <div class="panel-body">
+                    <div class="btn-group-vertical" role="activities" aria-label="...">
+                        <button type="button" class="btn btn-default">Pizza</button>
+                        <button type="button" class="btn btn-default">Movie</button>
+                        <button type="button" class="btn btn-default">Bowling</button>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">Name your activity</div>
+                <div class="panel-body">
+                    <div class="btn-group-vertical" role="activities" aria-label="...">
+                        <div class="form-group">
+                            <label for="nameActivities">You Name it:</label>
+                            <input type="text" class="form-control" id="nameActivities">
+                            <br>
+                            <button type="button" class="btn btn-default">Add</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+            <!-- end of left panel -->
+            <div class="col-sm-9">
+            <div class="panel panel-default">
+                <div class="panel-heading">Your Location</div>
+                <div class="panel-body" id="map">
+                <!-- Map is Here -->
+
+                </div>
+            </div>
+            </div>
+            <!-- end of map -->
+            
+        </div>
+        <!--end of row -->
+        <!-- Nav bar -->
+        <nav class="navbar navbar-inverse navbar-fixed-bottom" role="navigation">
+            <div class="container">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand">@ Copyright 2016 whygoalone.com</a>
+                </div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <a href="#">About</a>
+                        </li>
+                        <li>
+                            <a href="#">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
+            </div>
+            <!-- /.container -->
+        </nav>
+</body>
+<!-- <body style="height: 100%">
 	<div style="height: 100%" id="map"></div>
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6as3rvHxfYoYeZ00Qk-6hFyY0qm0LQGc&libraries=places&callback=initMap"
     async defer></script>
-</body>
+</body> -->
+
 </html>
