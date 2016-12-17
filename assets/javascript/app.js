@@ -7,12 +7,12 @@
     //plug user location in here
     // var latitude = 30.4704588;
     // var longitude = -97.68593229999999;
+    var latitude;
+    var longitude;
 
-    lat = 30.4704588;
-    lng = -97.68593229999999;
     var user = {
-        lat: lat,
-        lng: lng
+        lat: latitude,
+        lng: longitude
     };
 
     // var queryURL = "https://api.yelp.com/v2/search?term=" + interest + "&location=" + user;
@@ -22,13 +22,13 @@
     // });
 
     function initMap() {
-        console.log("Latitude here in Map : " + user.lat)
         map = new google.maps.Map(document.getElementById('map'), {
             center: user,
             //need to figure appropriate zoom (maybe based on how far of a radius the user chooses)
             zoom: 11
         });
-
+        console.log("initMap - USER:");
+        console.log(user);
 
         var request = {
             location: user,
@@ -36,12 +36,12 @@
             query: interest
         };
 
-        infowindow = new google.maps.InfoWindow();
-        console.log(map);
-        var service = new google.maps.places.PlacesService(map);
+        console.log("request: ");
+        console.log(request);
 
+        infowindow = new google.maps.InfoWindow();
+        var service = new google.maps.places.PlacesService(map);
         service.nearbySearch(request, callback);
-        console.log("service finished bro")
     }
 
     function callback(results, status) {
@@ -75,13 +75,16 @@
         }
 
         function success(position) {
-            var latitude = position.coords.latitude;
-            var longitude = position.coords.longitude;
-
-            output.innerHTML = '<p>Latitude is ' + latitude + '&deg; <br>Longitude is ' + longitude + '&deg;</p>';
+            user.lat = position.coords.latitude;
+            user.lng = position.coords.longitude;
+            console.log("User in Success = ");
+            console.log(user);
+            output.innerHTML = '<p>Latitude is ' + user.lat + '&deg; <br>Longitude is ' + user.lng + '&deg;</p>';
             // var img = new Image();
             // img.src = "https://maps.googleapis.com/maps/api/staticmap?center=" + latitude + "," + longitude + "&zoom=13&size=300x300&sensor=false";
             // output.appendChild(img);
+            console.log("Calling InitMap");
+            initMap();
         }
 
         function error() {
@@ -89,7 +92,7 @@
         }
 
         output.innerHTML = "<p>Locating…</p>";
-
+        console.log("Success Being called now!");
         navigator.geolocation.getCurrentPosition(success, error);
     }
 
@@ -175,5 +178,6 @@
     $("#geoFindMe").on("click", function(event) {
         geoFindMe();
         console.log("Calling Functions");
+        // $("#addGoogle").attr("src",'https://maps.googleapis.com/maps/api/js?key=AIzaSyC6as3rvHxfYoYeZ00Qk-6hFyY0qm0LQGc&libraries=places');
         // initMap();
     });
