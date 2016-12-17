@@ -13,10 +13,8 @@
     <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
     <!-- Link to Moment.js should go here -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script>
-    <title>Train Scheduler</title>
-    <script src="assets/javascript/app.js"></script>
+      <title>Why Go Alone?</title>
 </head>
-
 <body>
     <div class="cotainer">
         <div class="jumbotron" style="background-color: #fe5d26; color: #2e382e">
@@ -92,11 +90,29 @@
             </div>
             <!-- /.container -->
         </nav>
+    <!--GEOLOCATION HTML-->
+    <p>
+        <button id="geoFindMe">Show my location</button>
+    </p>
+    <div id="out"></div>
+    <!-- Adding Facebook login -->
+    <div class="fb-like" data-share="true" data-width="450" data-show-faces="true">
+    </div>
+    <div class="fb-login-button" data-max-rows="1" data-size="medium" data-show-faces="false" data-auto-logout-link="false"></div>
+    <div id="fb-root"></div>
+    <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+    </fb:login-button>
+    <div id="status">
+    </div>
+    <button id="myFacebookLogin">Login with Facebook</button>
+    <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+    </fb:login-button>
+    <div id="status">
+    </div>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6as3rvHxfYoYeZ00Qk-6hFyY0qm0LQGc&libraries=places" async defer></script>
+<!--     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6as3rvHxfYoYeZ00Qk-6hFyY0qm0LQGc&libraries=places&callback=initMap" async defer></script> -->
+    <!-- <script id="addGoogle" async defer src=""></script> -->
+    <script src="assets/javascript/app.js"></script>
 </body>
-<!-- <body style="height: 100%">
-	<div style="height: 100%" id="map"></div>
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6as3rvHxfYoYeZ00Qk-6hFyY0qm0LQGc&libraries=places&callback=initMap"
-    async defer></script>
-</body> -->
 
 </html>
