@@ -73,11 +73,41 @@
         console.log("request: ");
         console.log(request);
 
-        infowindow = new google.maps.InfoWindow();
+        // infowindow = new google.maps.InfoWindow();
+        var infoWindow = new google.maps.InfoWindow({map: map});
         var service = new google.maps.places.PlacesService(map);
         service.textSearch(request, callback);
-    }
 
+
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+      var pos = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude
+      };
+ createMarker(pos);
+      infoWindow.setPosition(pos);
+      infoWindow.setContent('Location found.');
+      map.setCenter(pos);
+      console.log(pos);
+      console.log("Location Found");
+    }, function() {
+      handleLocationError(true, infoWindow, map.getCenter());
+    });
+  } else {
+    // Browser doesn't support Geolocation
+    handleLocationError(false, infoWindow, map.getCenter());
+    console.log("Not supported");
+  }
+}
+
+
+function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+  infoWindow.setPosition(pos);
+  infoWindow.setContent(browserHasGeolocation ?
+                        'Error: The Geolocation service failed.' :
+                        'Error: Your browser doesn\'t support geolocation.');
+}
     function callback(results, status) {
         if (status === google.maps.places.PlacesServiceStatus.OK) {
             for (var i = 0; i < results.length; i++) {
