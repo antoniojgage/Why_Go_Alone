@@ -1,3 +1,45 @@
+//wait for the page to load
+
+    $(document).ready(function() {
+        //array of interests
+
+        var interests = ["pizza", "movie", "bowling"];
+
+        //Generic function display the interests
+
+        function renderButton() {
+                $("#interestView").empty();
+
+                //loop through the array of interests
+                for (var i = 0; i < interests.length; i++) {
+                    //dynamically generate the buttons when the page isloaded
+
+                    //jQuery
+                    $("#interestView").append('<button data-name="' + interests[i] + '" class="btn btn-primary interestButton">' + interests[i] + '</button>');
+                }
+            }
+            //handle when one button is clicked
+        $("#addInterest").on("click", function() {
+            console.log("Submit button is clicked");
+
+            //takes the input from the user typed in
+            var interest = $("#interestInput").val().trim();
+
+            console.log(interest + " is added to the Array");
+            if (interest != "") {
+                interests.push(interest);
+
+                renderButton();
+            } else {
+                $("#interestInput").attr("placeholder", "Enter your interest here.");
+                renderButton();
+            }
+            return false;
+
+        });
+        renderButton();
+      });
+
     var map;
     var infowindow;
     var userRadius;
