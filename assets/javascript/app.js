@@ -30,6 +30,9 @@ $(document).ready(function() {
             $("#interestView").append(newButton);
         }
     }
+
+    renderButton();
+
     //handle when one button is clicked
     $("#addInterest").on("click", function() {
         console.log("Submit button is clicked");
@@ -49,7 +52,12 @@ $(document).ready(function() {
         return false;
 
     });
-    renderButton();
+
+    function closeInterest() {
+        var index = interests.indexOf($(this).parent().attr("data-name"));
+        interests.splice(index, 1);
+        renderButton();
+    };
 
     function selectInterest() {
         interest = $(this).data("name");
@@ -92,7 +100,6 @@ $(document).ready(function() {
     }
 
     function createMarker(place) {
-        console.log(place);
         var placeLoc = place.geometry.location;
         var marker = new google.maps.Marker({
             map: map,
@@ -131,5 +138,5 @@ $(document).ready(function() {
     }
 
     $(document).on("click", ".interestButton", selectInterest);
-
+    $(document).on("click", ".closeInterest", closeInterest);
 });

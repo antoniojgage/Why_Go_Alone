@@ -6,8 +6,16 @@
 
 p { margin : 0; }
 /*END GEOLOCATION CSS*/
-
+.interestButton {
+	position: relative;
+	padding: 10px 15px;
+}
 .closeInterest {
+	position: absolute;
+	padding: 1px;
 	top: 0px;
-	right: 0px;
+	right: 2px;
+}
+.closeInterest:hover {
+	border: 1px solid white;
 }
