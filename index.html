@@ -44,32 +44,26 @@
 </head>
 
 <body>
-    <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-header">
-        <!-- Header section containing logo -->
-        <header class="mdl-layout__header mdl-color-text--white mdl-color--light-blue-700">
-            <div class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-grid">
-                <div class="mdl-layout__header-row mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-desktop">
-                    <h3><i class="material-icons">chat_bubble_outline</i> Why Go Alone!?</h3>
-                </div>
-                <div id="user-container">
-                    <div hidden id="user-pic"></div>
-                    <div hidden id="user-name"></div>
-                    <button hidden id="sign-out" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--white">
-                        Sign-out
-                    </button>
-                    <button hidden id="sign-in" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--white">
-                        <i class="material-icons">account_circle</i>Sign-in with Google
-                    </button>
-                </div>
+    <!--  <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-header"> -->
+    <!-- Header section containing logo -->
+    <header class="mdl-layout__header mdl-color-text--white mdl-color--light-blue-700">
+        <div class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-grid">
+            <div class="mdl-layout__header-row mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-desktop">
+                <h3><i class="material-icons">chat_bubble_outline</i> Why Go Alone!?</h3>
             </div>
-        </header>
-    </div>
-    <div class="container">
-        <div class="jumbotron" style="background-color: #fe5d26; color: #2e382e">
-
-            <h1 class="text-center"><strong> Why Go Alone??? </strong></h1>
+            <div id="user-container">
+                <div hidden id="user-pic"></div>
+                <div hidden id="user-name"></div>
+                <button hidden id="sign-out" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--white">
+                    Sign-out
+                </button>
+                <button hidden id="sign-in" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--white">
+                    <i class="material-icons">account_circle</i>Sign-in with Google
+                </button>
+            </div>
         </div>
-    </div>
+    </header>
+    <!-- </div> -->
     <!-- panel & main body -->
     <div class="container interests">
         <div class="row">
@@ -102,9 +96,9 @@
                     <div class="panel-heading">Your Location</div>
                     <div class="panel-body" id="map">
                         <!-- Map is Here -->
-                    <div class="panel-body text-center" id="map" style='height: 500px; padding: 0px'>
-                        <p style="margin-top: 25px">Click on an interest to find things to do with people near you!</p>
-
+                        <div class="panel-body text-center" id="map" style='height: 500px; padding: 0px'>
+                            <p style="margin-top: 25px">Click on an interest to find things to do with people near you!</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -169,11 +163,9 @@
             </div>
             <!-- /.container -->
         </nav>
-
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6as3rvHxfYoYeZ00Qk-6hFyY0qm0LQGc&libraries=places" async defer></script> 
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6as3rvHxfYoYeZ00Qk-6hFyY0qm0LQGc&libraries=places" async defer></script>
         <!--     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6as3rvHxfYoYeZ00Qk-6hFyY0qm0LQGc&libraries=places&callback=initMap" async defer></script> -->
         <!-- <script id="addGoogle" async defer src=""></script> -->
-
         <script src="assets/javascript/app.js"></script>
         <script src="assets/javascript/main.js"></script>
 </body>
