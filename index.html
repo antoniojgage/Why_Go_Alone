@@ -17,13 +17,13 @@
 </head>
 
 <body>
-    <div class="cotainer">
-        <div class="jumbotron" style="background-color: #fe5d26; color: #2e382e">
+    <div class="container">
+        <div class="jumbotron">
             <h1 class="text-center"><strong> Why Go Alone??? </strong></h1>
         </div>
     </div>
     <!-- panel & main body -->
-    <div class="container-interests">
+    <div class="container interests">
         <div class="row">
             <div class="col-sm-3">
                 <div class="panel panel-default">
@@ -40,9 +40,9 @@
                             <div class="form-group">
                                 <label for="interestInput">
                                     <h4>Add an interest</h4></label>
-                                <input type="text" id="interestInput" class="form-control" placeholder="add an Interest">
+                                <input type="text" id="interestInput" class="form-control" placeholder="tell me your interest">
                                 <br>
-                                <input id="addInterest" type="submit" value="ADD">
+                                <input id="addInterest" type="submit" class="btn btn-primary" value="Add">
                             </div>
                         </form>
                     </div>
@@ -52,8 +52,11 @@
             <div class="col-sm-9">
                 <div class="panel panel-default" style="margin-bottom: 100px">
                     <div class="panel-heading">Your Location</div>
+                    <div class="panel-body" id="map">
+                        <!-- Map is Here -->
                     <div class="panel-body text-center" id="map" style='height: 500px; padding: 0px'>
                         <p style="margin-top: 25px">Click on an interest to find things to do with people near you!</p>
+
                     </div>
                 </div>
             </div>
@@ -87,7 +90,7 @@
             </div>
             <!-- /.container -->
         </nav>
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6as3rvHxfYoYeZ00Qk-6hFyY0qm0LQGc&libraries=places" async defer></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6as3rvHxfYoYeZ00Qk-6hFyY0qm0LQGc&libraries=places" async defer></script> 
         <!--     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6as3rvHxfYoYeZ00Qk-6hFyY0qm0LQGc&libraries=places&callback=initMap" async defer></script> -->
         <!-- <script id="addGoogle" async defer src=""></script> -->
         <script src="assets/javascript/app.js"></script>

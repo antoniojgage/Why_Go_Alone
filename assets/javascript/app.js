@@ -29,6 +29,44 @@ $(document).ready(function() {
         if (interest != "") {
             interests.push(interest);
 
+            $("#interestInput").val("");
+            $("#interestInput").attr("placeholder", "tell me your interest");
+            renderButton();
+        } else {
+             
+            return;
+        }
+        return false;
+
+    });
+    renderButton();
+});
+
+var map;
+var infowindow;
+var userRadius;
+var interest = "pizza";
+var keyword;
+// var latitude = 30.4704588;
+// var longitude = -97.68593229999999;
+var latitude;
+var longitude;
+
+var user = {
+    lat: latitude,
+    lng: longitude
+};
+
+function initMap() {
+    map = new google.maps.Map(document.getElementById('map'), {
+        center: user,
+        //need to figure appropriate zoom (maybe based on how far of a radius the user chooses)
+        zoom: 11
+    });
+    console.log("initMap - USER:");
+    console.log(user);
+
+
             renderButton();
         } else {
             $("#interestInput").attr("placeholder", "Enter your interest here.");
@@ -40,36 +78,6 @@ $(document).ready(function() {
     renderButton();
 });
 
-var map;
-var infowindow;
-//userRadius not being used yet
-var userRadius;
-var interest;
-var latitude;
-var longitude;
-
-var user = {
-    lat: latitude,
-    lng: longitude
-};
-
-function selectInterest() {
-    interest = $(this).text();
-    if (latitude === undefined || longitude === undefined) {
-        geoFindMe();
-    } else {
-        initMap();
-    }
-};
-
-function initMap() {
-    map = new google.maps.Map(document.getElementById('map'), {
-        center: user,
-        //need to figure appropriate zoom (maybe based on how far of a radius the user chooses)
-        zoom: 11
-    });
-    console.log("initMap - USER:");
-    console.log(user);
 
     var request = {
         location: user,
@@ -93,6 +101,7 @@ function callback(results, status) {
     }
 }
 
+
 function createMarker(place) {
     var placeLoc = place.geometry.location;
     var marker = new google.maps.Marker({
@@ -104,13 +113,18 @@ function createMarker(place) {
         infowindow.setContent(place.name);
         infowindow.open(map, this);
     });
+
 }
 //START OF GEOLOCATION CODING
 function geoFindMe() {
     var output = document.getElementById("out");
 
     if (!navigator.geolocation) {
+
+        output.innerHTML = "<p>Geolocation is not supported by your browser</p>";
+
         error();
+
         return;
     }
 
@@ -119,16 +133,31 @@ function geoFindMe() {
         user.lng = position.coords.longitude;
         console.log("User in Success = ");
         console.log(user);
+
+        output.innerHTML = '<p>Latitude is ' + user.lat + '&deg; <br>Longitude is ' + user.lng + '&deg;</p>';
+
         console.log("Calling InitMap");
         initMap();
     }
 
     function error() {
-        console.log("Error retreiving location");
+
+        output.innerHTML = "Unable to retrieve your location";
     }
 
+    output.innerHTML = "<p>Locating…</p>";
+
+        console.log("Error retreiving location");
+    }
     console.log("Success Being called now!");
     navigator.geolocation.getCurrentPosition(success, error);
 }
 
+
+$("#geoFindMe").on("click", function(event) {
+    geoFindMe();
+    console.log("Calling Functions");
+});
+
 $(document).on("click", ".interestButton" ,selectInterest);
+
