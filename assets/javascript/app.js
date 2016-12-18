@@ -28,6 +28,7 @@ $(document).ready(function() {
         console.log(interest + " is added to the Array");
         if (interest != "") {
             interests.push(interest);
+
             $("#interestInput").val("");
             $("#interestInput").attr("placeholder", "tell me your interest");
             renderButton();
@@ -65,6 +66,19 @@ function initMap() {
     console.log("initMap - USER:");
     console.log(user);
 
+
+            renderButton();
+        } else {
+            $("#interestInput").attr("placeholder", "Enter your interest here.");
+            renderButton();
+        }
+        return false;
+
+    });
+    renderButton();
+});
+
+
     var request = {
         location: user,
         radius: '500',
@@ -87,6 +101,7 @@ function callback(results, status) {
     }
 }
 
+
 function createMarker(place) {
     var placeLoc = place.geometry.location;
     var marker = new google.maps.Marker({
@@ -98,13 +113,18 @@ function createMarker(place) {
         infowindow.setContent(place.name);
         infowindow.open(map, this);
     });
+
 }
 //START OF GEOLOCATION CODING
 function geoFindMe() {
     var output = document.getElementById("out");
 
     if (!navigator.geolocation) {
+
         output.innerHTML = "<p>Geolocation is not supported by your browser</p>";
+
+        error();
+
         return;
     }
 
@@ -113,21 +133,31 @@ function geoFindMe() {
         user.lng = position.coords.longitude;
         console.log("User in Success = ");
         console.log(user);
+
         output.innerHTML = '<p>Latitude is ' + user.lat + '&deg; <br>Longitude is ' + user.lng + '&deg;</p>';
+
         console.log("Calling InitMap");
         initMap();
     }
 
     function error() {
+
         output.innerHTML = "Unable to retrieve your location";
     }
 
     output.innerHTML = "<p>Locating…</p>";
+
+        console.log("Error retreiving location");
+    }
     console.log("Success Being called now!");
     navigator.geolocation.getCurrentPosition(success, error);
 }
+
 
 $("#geoFindMe").on("click", function(event) {
     geoFindMe();
     console.log("Calling Functions");
 });
+
+$(document).on("click", ".interestButton" ,selectInterest);
+
