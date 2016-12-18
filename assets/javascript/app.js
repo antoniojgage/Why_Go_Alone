@@ -42,11 +42,9 @@ $(document).ready(function() {
 
 var map;
 var infowindow;
+//userRadius not being used yet
 var userRadius;
-var interest = "pizza";
-var keyword;
-// var latitude = 30.4704588;
-// var longitude = -97.68593229999999;
+var interest;
 var latitude;
 var longitude;
 
