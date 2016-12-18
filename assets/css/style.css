@@ -6,3 +6,8 @@
 
 p { margin : 0; }
 /*END GEOLOCATION CSS*/
+
+.closeInterest {
+	top: 0px;
+	right: 0px;
+}
