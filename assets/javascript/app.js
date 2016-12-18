@@ -1,12 +1,9 @@
 //wait for the page to load
-
 $(document).ready(function() {
     //array of interests
 
     var interests = ["pizza", "movie", "bowling"];
-
     //Generic function display the interests
-
     function renderButton() {
         $("#interestView").empty();
 
@@ -33,11 +30,9 @@ $(document).ready(function() {
             $("#interestInput").attr("placeholder", "tell me your interest");
             renderButton();
         } else {
-             
             return;
         }
         return false;
-
     });
     renderButton();
 });
@@ -67,18 +62,6 @@ function initMap() {
     console.log(user);
 
 
-            renderButton();
-        } else {
-            $("#interestInput").attr("placeholder", "Enter your interest here.");
-            renderButton();
-        }
-        return false;
-
-    });
-    renderButton();
-});
-
-
     var request = {
         location: user,
         radius: '500',
@@ -101,6 +84,14 @@ function callback(results, status) {
     }
 }
 
+function selectInterest() {
+    interest = $(this).data("name");
+    if (latitude === undefined || longitude === undefined) {
+        geoFindMe();
+    } else {
+        initMap();
+    }
+};
 
 function createMarker(place) {
     var placeLoc = place.geometry.location;
@@ -134,7 +125,7 @@ function geoFindMe() {
         console.log("User in Success = ");
         console.log(user);
 
-        output.innerHTML = '<p>Latitude is ' + user.lat + '&deg; <br>Longitude is ' + user.lng + '&deg;</p>';
+        // output.innerHTML = '<p>Latitude is ' + user.lat + '&deg; <br>Longitude is ' + user.lng + '&deg;</p>';
 
         console.log("Calling InitMap");
         initMap();
@@ -145,13 +136,11 @@ function geoFindMe() {
         output.innerHTML = "Unable to retrieve your location";
     }
 
-    output.innerHTML = "<p>Locating…</p>";
-
-        console.log("Error retreiving location");
-    }
+    // output.innerHTML = "<p>Locating…</p>";
     console.log("Success Being called now!");
     navigator.geolocation.getCurrentPosition(success, error);
 }
+
 
 
 $("#geoFindMe").on("click", function(event) {
@@ -159,5 +148,4 @@ $("#geoFindMe").on("click", function(event) {
     console.log("Calling Functions");
 });
 
-$(document).on("click", ".interestButton" ,selectInterest);
-
+$(document).on("click", ".interestButton", selectInterest);
