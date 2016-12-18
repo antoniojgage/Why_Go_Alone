@@ -33,7 +33,7 @@ $(document).ready(function() {
             $("#interestInput").attr("placeholder", "tell me your interest");
             renderButton();
         } else {
-             
+
             return;
         }
         return false;
@@ -65,18 +65,6 @@ function initMap() {
     });
     console.log("initMap - USER:");
     console.log(user);
-
-
-            renderButton();
-        } else {
-            $("#interestInput").attr("placeholder", "Enter your interest here.");
-            renderButton();
-        }
-        return false;
-
-    });
-    renderButton();
-});
 
 
     var request = {
@@ -146,12 +134,10 @@ function geoFindMe() {
     }
 
     output.innerHTML = "<p>Locating…</p>";
-
-        console.log("Error retreiving location");
-    }
     console.log("Success Being called now!");
     navigator.geolocation.getCurrentPosition(success, error);
 }
+
 
 
 $("#geoFindMe").on("click", function(event) {
@@ -159,5 +145,4 @@ $("#geoFindMe").on("click", function(event) {
     console.log("Calling Functions");
 });
 
-$(document).on("click", ".interestButton" ,selectInterest);
-
+$(document).on("click", ".interestButton", selectInterest);
