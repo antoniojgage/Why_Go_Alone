@@ -137,14 +137,15 @@ $(document).ready(function() {
         var placeLoc = place.geometry.location;
         var marker = new google.maps.Marker({
             map: map,
-            position: place.geometry.location
+            position: place.geometry.location,
         });
 
         google.maps.event.addListener(marker, 'click', function() {
-            infowindow.setContent(place.name);
+//infoWindow.setContent contains all of the information you want to show up in the marker.  Custom Text can be added via a string or variable.
+            infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + place.formatted_address + '</strong><br>' + 'Google Rating: ' + place.rating + '<strong><br>' + 'Lat: '+user.lat  + ' Lng: '+user.lng);
             infowindow.open(map, this);
         });
-
+     
     }
     function addMarker(feature) {
           var marker = new google.maps.Marker({
