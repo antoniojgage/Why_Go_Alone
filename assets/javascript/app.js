@@ -56,16 +56,21 @@ $(document).ready(function() {
     function closeInterest() {
         var index = interests.indexOf($(this).parent().attr("data-name"));
         interests.splice(index, 1);
+        $("#map").html($("<p style='margin-top: 25px'>Click on an interest to find things to do with people near you!</p>"));
         renderButton();
-
+        if (interests.indexOf(interest) !== -1) {
+            initMap();
+        }
     };
 
     function selectInterest() {
         interest = $(this).data("name");
-        if (latitude === undefined || longitude === undefined) {
-            geoFindMe();
-        } else {
-            initMap();
+        if (interests.indexOf(interest) !== -1) {
+            if (latitude === undefined || longitude === undefined) {
+                geoFindMe();
+            } else {
+                initMap();
+            }
         }
     };
 
@@ -84,6 +89,14 @@ $(document).ready(function() {
             query: interest
         };
 
+        var iconBase = 'http://maps.google.com/mapfiles/kml/paddle/';
+
+        var userMarker = new google.maps.Marker({
+            map: map,
+            position: user,
+            icon: iconBase + 'blu-circle.png'
+        });
+        userMarker.name = "You are here";
 
         console.log("request: ");
         console.log(request);
@@ -144,4 +157,3 @@ $(document).ready(function() {
     $(document).on("click", ".interestButton", selectInterest);
     $(document).on("click", ".closeInterest", closeInterest);
 });
-
