@@ -3,6 +3,19 @@ $(document).ready(function() {
     //array of interests
 
     var interests = ["pizza", "movie", "bowling"];
+    var map;
+    var infowindow;
+    //userRadius not being used yet
+    var userRadius;
+    var interest;
+    var latitude;
+    var longitude;
+
+    var user = {
+        lat: latitude,
+        lng: longitude
+    };
+
     //Generic function display the interests
     function renderButton() {
         $("#interestView").empty();
@@ -10,11 +23,15 @@ $(document).ready(function() {
         //loop through the array of interests
         for (var i = 0; i < interests.length; i++) {
             //dynamically generate the buttons when the page isloaded
-
+            var newButton = $('<button data-name="' + interests[i] + '" class="btn btn-primary interestButton">' + interests[i] + '</button>');
+            newButton.append($("<div class='closeInterest'>x</div>"));
             //jQuery
-            $("#interestView").append('<button data-name="' + interests[i] + '" class="btn btn-primary interestButton">' + interests[i] + '</button>');
+            $("#interestView").append(newButton);
         }
     }
+
+    renderButton();
+
     //handle when one button is clicked
     $("#addInterest").on("click", function() {
         console.log("Submit button is clicked");
@@ -34,118 +51,97 @@ $(document).ready(function() {
         }
         return false;
     });
-    renderButton();
-});
-
-var map;
-var infowindow;
-var userRadius;
-var interest = "pizza";
-var keyword;
-// var latitude = 30.4704588;
-// var longitude = -97.68593229999999;
-var latitude;
-var longitude;
-
-var user = {
-    lat: latitude,
-    lng: longitude
-};
-
-function initMap() {
-    map = new google.maps.Map(document.getElementById('map'), {
-        center: user,
-        //need to figure appropriate zoom (maybe based on how far of a radius the user chooses)
-        zoom: 11
-    });
-    console.log("initMap - USER:");
-    console.log(user);
 
 
-    var request = {
-        location: user,
-        radius: '500',
-        query: interest
+    function closeInterest() {
+        var index = interests.indexOf($(this).parent().attr("data-name"));
+        interests.splice(index, 1);
+        renderButton();
+
     };
 
-    console.log("request: ");
-    console.log(request);
-
-    infowindow = new google.maps.InfoWindow();
-    var service = new google.maps.places.PlacesService(map);
-    service.textSearch(request, callback);
-}
-
-function callback(results, status) {
-    if (status === google.maps.places.PlacesServiceStatus.OK) {
-        for (var i = 0; i < results.length; i++) {
-            createMarker(results[i]);
+    function selectInterest() {
+        interest = $(this).data("name");
+        if (latitude === undefined || longitude === undefined) {
+            geoFindMe();
+        } else {
+            initMap();
         }
-    }
-}
+    };
 
-function selectInterest() {
-    interest = $(this).data("name");
-    if (latitude === undefined || longitude === undefined) {
-        geoFindMe();
-    } else {
-        initMap();
-    }
-};
-
-function createMarker(place) {
-    var placeLoc = place.geometry.location;
-    var marker = new google.maps.Marker({
-        map: map,
-        position: place.geometry.location
-    });
-
-    google.maps.event.addListener(marker, 'click', function() {
-        infowindow.setContent(place.name);
-        infowindow.open(map, this);
-    });
-
-}
-//START OF GEOLOCATION CODING
-function geoFindMe() {
-    var output = document.getElementById("out");
-
-    if (!navigator.geolocation) {
-
-        output.innerHTML = "<p>Geolocation is not supported by your browser</p>";
-
-        error();
-
-        return;
-    }
-
-    function success(position) {
-        user.lat = position.coords.latitude;
-        user.lng = position.coords.longitude;
-        console.log("User in Success = ");
+    function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: user,
+            //need to figure appropriate zoom (maybe based on how far of a radius the user chooses)
+            zoom: 11
+        });
+        console.log("initMap - USER:");
         console.log(user);
 
-        // output.innerHTML = '<p>Latitude is ' + user.lat + '&deg; <br>Longitude is ' + user.lng + '&deg;</p>';
+        var request = {
+            location: user,
+            radius: '500',
+            query: interest
+        };
 
-        console.log("Calling InitMap");
-        initMap();
+
+        console.log("request: ");
+        console.log(request);
+
+        infowindow = new google.maps.InfoWindow();
+        var service = new google.maps.places.PlacesService(map);
+        service.textSearch(request, callback);
     }
 
-    function error() {
-
-        output.innerHTML = "Unable to retrieve your location";
+    function callback(results, status) {
+        if (status === google.maps.places.PlacesServiceStatus.OK) {
+            for (var i = 0; i < results.length; i++) {
+                createMarker(results[i]);
+            }
+        }
     }
 
-    // output.innerHTML = "<p>Locating…</p>";
-    console.log("Success Being called now!");
-    navigator.geolocation.getCurrentPosition(success, error);
-}
+    function createMarker(place) {
+        var placeLoc = place.geometry.location;
+        var marker = new google.maps.Marker({
+            map: map,
+            position: place.geometry.location
+        });
+
+        google.maps.event.addListener(marker, 'click', function() {
+            infowindow.setContent(place.name);
+            infowindow.open(map, this);
+        });
+
+    }
+    //START OF GEOLOCATION CODING
+    function geoFindMe() {
+        var output = document.getElementById("out");
 
 
+        if (!navigator.geolocation) {
+            error();
+            return;
+        }
 
-$("#geoFindMe").on("click", function(event) {
-    geoFindMe();
-    console.log("Calling Functions");
+        function success(position) {
+            user.lat = position.coords.latitude;
+            user.lng = position.coords.longitude;
+            console.log("User in Success = ");
+            console.log(user);
+            console.log("Calling InitMap");
+            initMap();
+        }
+
+        function error() {
+            console.log("Error retreiving location");
+        }
+
+        console.log("Success Being called now!");
+        navigator.geolocation.getCurrentPosition(success, error);
+    }
+
+    $(document).on("click", ".interestButton", selectInterest);
+    $(document).on("click", ".closeInterest", closeInterest);
 });
 
-$(document).on("click", ".interestButton", selectInterest);
