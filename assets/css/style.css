@@ -10,17 +10,21 @@
 	font-weight: bold;
 }
 
-.jumbotron{
+.mdl-layout__header{
 	background-color: #fe5d26; 
-	color: #2e382e;
+	color: white;
 }
-#interestInput{
 
-
+#user-container{
+	margin: 20px;
 }
 #map{
 	height: 500px; 
 	padding: 0px;
+}
+#chat{
+	height: 500px;
+	 padding: 0px;
 }
 
 /*GEOLOCATION CSS
