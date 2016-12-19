@@ -89,6 +89,14 @@ $(document).ready(function() {
             query: interest
         };
 
+        var iconBase = 'http://maps.google.com/mapfiles/kml/paddle/';
+
+        var userMarker = new google.maps.Marker({
+            map: map,
+            position: user,
+            icon: iconBase + 'blu-circle.png'
+        });
+        userMarker.name = "You are here";
 
         console.log("request: ");
         console.log(request);
