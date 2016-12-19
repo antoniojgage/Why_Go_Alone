@@ -1,5 +1,4 @@
 //wait for the page to load
-
 $(document).ready(function() {
     //array of interests
 
@@ -44,19 +43,21 @@ $(document).ready(function() {
         if (interest != "") {
             interests.push(interest);
 
+            $("#interestInput").val("");
+            $("#interestInput").attr("placeholder", "tell me your interest");
             renderButton();
         } else {
-            $("#interestInput").attr("placeholder", "Enter your interest here.");
-            renderButton();
+            return;
         }
         return false;
-
     });
+
 
     function closeInterest() {
         var index = interests.indexOf($(this).parent().attr("data-name"));
         interests.splice(index, 1);
         renderButton();
+
     };
 
     function selectInterest() {
@@ -82,6 +83,7 @@ $(document).ready(function() {
             radius: '500',
             query: interest
         };
+
 
         console.log("request: ");
         console.log(request);
@@ -110,10 +112,12 @@ $(document).ready(function() {
             infowindow.setContent(place.name);
             infowindow.open(map, this);
         });
+
     }
     //START OF GEOLOCATION CODING
     function geoFindMe() {
         var output = document.getElementById("out");
+
 
         if (!navigator.geolocation) {
             error();
@@ -140,3 +144,4 @@ $(document).ready(function() {
     $(document).on("click", ".interestButton", selectInterest);
     $(document).on("click", ".closeInterest", closeInterest);
 });
+

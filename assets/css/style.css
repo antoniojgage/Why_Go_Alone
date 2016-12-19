@@ -1,3 +1,28 @@
+.btn{
+	margin: 1%;
+	background-color: #20a39e;
+	font-weight: bold;
+	padding: 1%;
+}
+#addInterest
+{
+	background-color: #20a39e;
+	font-weight: bold;
+}
+
+.jumbotron{
+	background-color: #fe5d26; 
+	color: #2e382e;
+}
+#interestInput{
+
+
+}
+#map{
+	height: 500px; 
+	padding: 0px;
+}
+
 /*GEOLOCATION CSS
 */body {
   padding: 20px;
