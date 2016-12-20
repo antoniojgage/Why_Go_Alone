@@ -102,8 +102,40 @@ $(document).ready(function() {
         console.log(request);
 
         infowindow = new google.maps.InfoWindow();
+
+        var infoWindow = new google.maps.InfoWindow({ map: map });
         var service = new google.maps.places.PlacesService(map);
         service.textSearch(request, callback);
+
+
+        //   if (navigator.geolocation) {
+        //     navigator.geolocation.getCurrentPosition(function(position) {
+        //       var pos = {
+        //         lat: position.coords.latitude,
+        //         lng: position.coords.longitude
+        //       };
+        //  createMarker(pos);
+        //       infoWindow.setPosition(pos);
+        //       infoWindow.setContent('Location found.');
+        //       map.setCenter(pos);
+        //       console.log(pos);
+        //       console.log("Location Found");
+        //     }, function() {
+        //       handleLocationError(true, infoWindow, map.getCenter());
+        //     });
+        //   } else {
+        //     // Browser doesn't support Geolocation
+        //     handleLocationError(false, infoWindow, map.getCenter());
+        //     console.log("Not supported");
+        //   }
+        // }
+    }
+
+    function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+        infoWindow.setPosition(pos);
+        infoWindow.setContent(browserHasGeolocation ?
+            'Error: The Geolocation service failed.' :
+            'Error: Your browser doesn\'t support geolocation.');
     }
 
     function callback(results, status) {
@@ -118,15 +150,23 @@ $(document).ready(function() {
         var placeLoc = place.geometry.location;
         var marker = new google.maps.Marker({
             map: map,
-            position: place.geometry.location
+            position: place.geometry.location,
         });
 
         google.maps.event.addListener(marker, 'click', function() {
-            infowindow.setContent(place.name);
+//infoWindow.setContent contains all of the information you want to show up in the marker.  Custom Text can be added via a string or variable.
+            infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + place.formatted_address + '</strong><br>' + 'Google Rating: ' + place.rating + '<strong><br>' + 'Lat: '+user.lat  + ' Lng: '+user.lng);
             infowindow.open(map, this);
         });
-
+     
     }
+    function addMarker(feature) {
+          var marker = new google.maps.Marker({
+            position: feature.position,
+            icon: icons[feature.type].icon,
+            map: map
+          });
+        }
     //START OF GEOLOCATION CODING
     function geoFindMe() {
         var output = document.getElementById("out");
