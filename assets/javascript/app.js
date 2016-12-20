@@ -1,7 +1,18 @@
 //wait for the page to load
 $(document).ready(function() {
-    //array of interests
 
+    // Initialize Firebase
+    var config = {
+        apiKey: "AIzaSyByWTJGeG8HO1UyH2pubvp022Q2AXvJc88",
+        authDomain: "why-go-alone.firebaseapp.com",
+        databaseURL: "https://why-go-alone.firebaseio.com",
+        storageBucket: "why-go-alone.appspot.com",
+        messagingSenderId: "141733030000"
+    };
+    var usersApp = firebase.initializeApp(config, "users-database");
+
+    var usersDatabase = usersApp.database();
+    //array of interests
     var interests = ["pizza", "movie", "bowling"];
     var map;
     var infowindow;
@@ -10,11 +21,27 @@ $(document).ready(function() {
     var interest;
     var latitude;
     var longitude;
+    var numPeople = 5;
 
     var user = {
         lat: latitude,
         lng: longitude
     };
+
+    // usersDatabase.ref().set({
+    //     users: {}
+    // });
+
+    // if ("josh exists"){
+    //     alert("Josh already exists");
+    // } else {
+        var newUser = usersDatabase.ref("users").push({
+            name: "Josh", 
+            interests: ["sushi", "pets", "movie"]
+    //     });
+    // }
+
+    var userKey = newUser.path.o[1];
 
     //Generic function display the interests
     function renderButton() {
@@ -155,7 +182,7 @@ $(document).ready(function() {
 
         google.maps.event.addListener(marker, 'click', function() {
 //infoWindow.setContent contains all of the information you want to show up in the marker.  Custom Text can be added via a string or variable.
-            infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + place.formatted_address + '</strong><br>' + 'Google Rating: ' + place.rating + '<strong><br>' + 'Lat: '+user.lat  + ' Lng: '+user.lng);
+            infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + place.formatted_address + '</strong><br>' + 'Google Rating: ' + place.rating + '<strong><br>' + numPeople + " people want to go here!");
             infowindow.open(map, this);
         });
      
