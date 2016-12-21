@@ -1,20 +1,47 @@
 //wait for the page to load
 $(document).ready(function() {
-    //array of interests
 
+    // Initialize Firebase
+    var config = {
+        apiKey: "AIzaSyByWTJGeG8HO1UyH2pubvp022Q2AXvJc88",
+        authDomain: "why-go-alone.firebaseapp.com",
+        databaseURL: "https://why-go-alone.firebaseio.com",
+        storageBucket: "why-go-alone.appspot.com",
+        messagingSenderId: "141733030000"
+    };
+    var usersApp = firebase.initializeApp(config, "users-database");
+
+    var usersDatabase = usersApp.database();
+    //array of interests
     var interests = ["pizza", "movie", "bowling"];
     var map;
     var infowindow;
     //userRadius not being used yet
     var userRadius;
-    var interest;
+    var currentInterest;
     var latitude;
     var longitude;
+    var numPeople = 0;
 
     var user = {
         lat: latitude,
         lng: longitude
     };
+
+    // usersDatabase.ref().set({
+    //     users: {}
+    // });
+
+    // if ("josh exists"){
+    //     alert("Josh already exists");
+    // } else {
+    var newUser = usersDatabase.ref("users").push({
+        name: "Mary",
+        interests: ["sushi", "pets", "movie"]
+    });
+    // }
+
+    var userKey = newUser.path.o[1];
 
     //Generic function display the interests
     function renderButton() {
@@ -37,11 +64,11 @@ $(document).ready(function() {
         console.log("Submit button is clicked");
 
         //takes the input from the user typed in
-        var interest = $("#interestInput").val().trim();
+        var currentInterest = $("#interestInput").val().trim();
 
-        console.log(interest + " is added to the Array");
-        if (interest != "") {
-            interests.push(interest);
+        console.log(currentInterest + " is added to the Array");
+        if (currentInterest != "") {
+            interests.push(currentInterest);
 
             $("#interestInput").val("");
             $("#interestInput").attr("placeholder", "tell me your interest");
@@ -52,20 +79,19 @@ $(document).ready(function() {
         return false;
     });
 
-
     function closeInterest() {
         var index = interests.indexOf($(this).parent().attr("data-name"));
         interests.splice(index, 1);
         $("#map").html($("<p style='margin-top: 25px'>Click on an interest to find things to do with people near you!</p>"));
         renderButton();
-        if (interests.indexOf(interest) !== -1) {
+        if (interests.indexOf(currentInterest) !== -1) {
             initMap();
         }
     };
 
     function selectInterest() {
-        interest = $(this).data("name");
-        if (interests.indexOf(interest) !== -1) {
+        currentInterest = $(this).data("name");
+        if (interests.indexOf(currentInterest) !== -1) {
             if (latitude === undefined || longitude === undefined) {
                 geoFindMe();
             } else {
@@ -73,6 +99,31 @@ $(document).ready(function() {
             }
         }
     };
+
+    // usersDatabase.ref("/users").on("value", function(snap) {
+    //     console.log("hello");
+    //     var len = snap.numChildren();
+    //     console.log(len);
+    //     for(var i = 0; i < len; i++) {
+    //         for(key in snap) {
+    //             console.log(key);
+    //         }
+    //     }
+    // });
+
+    usersDatabase.ref("/users").on("child_added", function(snap) {
+        console.log("hello");
+        var len = snap.numChildren();
+        console.log(len);
+        var key = snap.key; //"ada"
+        var name = snap.val().name;
+        console.log("Key = " + key + "Name = " + name);
+        var childKey = snap.child(); //"last"
+        console.log("Childkey = " + childKey);
+    });
+
+    // });
+
 
     function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
@@ -86,7 +137,7 @@ $(document).ready(function() {
         var request = {
             location: user,
             radius: '500',
-            query: interest
+            query: currentInterest
         };
 
         var iconBase = 'http://maps.google.com/mapfiles/kml/paddle/';
@@ -106,29 +157,6 @@ $(document).ready(function() {
         var infoWindow = new google.maps.InfoWindow({ map: map });
         var service = new google.maps.places.PlacesService(map);
         service.textSearch(request, callback);
-
-
-        //   if (navigator.geolocation) {
-        //     navigator.geolocation.getCurrentPosition(function(position) {
-        //       var pos = {
-        //         lat: position.coords.latitude,
-        //         lng: position.coords.longitude
-        //       };
-        //  createMarker(pos);
-        //       infoWindow.setPosition(pos);
-        //       infoWindow.setContent('Location found.');
-        //       map.setCenter(pos);
-        //       console.log(pos);
-        //       console.log("Location Found");
-        //     }, function() {
-        //       handleLocationError(true, infoWindow, map.getCenter());
-        //     });
-        //   } else {
-        //     // Browser doesn't support Geolocation
-        //     handleLocationError(false, infoWindow, map.getCenter());
-        //     console.log("Not supported");
-        //   }
-        // }
     }
 
     function handleLocationError(browserHasGeolocation, infoWindow, pos) {
@@ -154,19 +182,20 @@ $(document).ready(function() {
         });
 
         google.maps.event.addListener(marker, 'click', function() {
-//infoWindow.setContent contains all of the information you want to show up in the marker.  Custom Text can be added via a string or variable.
-            infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + place.formatted_address + '</strong><br>' + 'Google Rating: ' + place.rating + '<strong><br>' + 'Lat: '+user.lat  + ' Lng: '+user.lng);
+            //infoWindow.setContent contains all of the information you want to show up in the marker.  Custom Text can be added via a string or variable.
+            infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + place.formatted_address + '</strong><br>' + 'Google Rating: ' + place.rating + '<strong><br>' + numPeople + " people want to go here!");
             infowindow.open(map, this);
         });
-     
+
     }
+
     function addMarker(feature) {
-          var marker = new google.maps.Marker({
+        var marker = new google.maps.Marker({
             position: feature.position,
             icon: icons[feature.type].icon,
             map: map
-          });
-        }
+        });
+    }
     //START OF GEOLOCATION CODING
     function geoFindMe() {
         var output = document.getElementById("out");
