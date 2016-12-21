@@ -1,22 +1,36 @@
 .btn{
 	margin: 1%;
-	background-color: #20a39e;
+	background-color: #fe5d26;
 	font-weight: bold;
 	padding: 1%;
+	border-color: #fe5d26;
+}
+.btn:hover{
+
+	background-color: #cfcfea;
+	border-color: #cfcfea;
+}
+
+#pizzaImg{
+	height: 60%;
+	width: 60%;
+
 }
 #addInterest
 {
-	background-color: #20a39e;
+	background-color: #fe5d26;
 	font-weight: bold;
+	border-color: #fe5d26;
 }
 
 .mdl-layout__header{
 	background-color: #fe5d26; 
 	color: white;
+	height: 140px;
 }
 
 #user-container{
-	margin: 20px;
+	margin: 50px;
 }
 #map{
 	height: 500px; 
@@ -24,13 +38,67 @@
 }
 #chat{
 	height: 500px;
-	 padding: 0px;
+	padding: 0px;
 }
 
-/*GEOLOCATION CSS
-*/body {
+.mdl-button{
+	color: white;
+}
+h2{
+	font-family: 'Gloria Hallelujah', cursive;
+	font-weight: bold;
+}
+
+h4{
+	color: white;
+	font-family: 'Gloria Hallelujah', cursive;
+}
+
+.panel-body{
+	margin: 0px;
+}
+
+#blackColor{
+	color: black;
+}
+#headingArea{
+	background-color: #fe5d26;
+	text-align: center;
+}
+
+p {
+	padding-top: 25px;
+	margin-top: 25px;
+}
+#interestInput{
+	font-family: 'Gloria Hallelujah', cursive;
+}
+
+#btnBox{
+	margin-bottom: 20px;
+}
+
+#panelBox{
+	margin-bottom: 100px;
+}
+#logoArea{
+	max-width: 3000px;
+}
+
+footer{
+	text-align: center;
+	padding: 1em;
+}
+
+a {
+	color: white;
+}
+
+
+/*GEOLOCATION CSS*/
+body {
   padding: 20px;
-  background-color:#ffffc9
+  background-color: #cfcfea;
 }
 
 p { margin : 0; }
@@ -44,6 +112,7 @@ p { margin : 0; }
 	padding: 1px;
 	top: 0px;
 	right: 2px;
+
 }
 .closeInterest:hover {
 	border: 1px solid white;
