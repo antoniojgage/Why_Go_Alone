@@ -6,6 +6,10 @@
     <!-- Latest compiled and minified CSS -->
     <!--Simple bootstrap style for easier layout -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!--google font-->
+    <link href="https://fonts.googleapis.com/css?family=Spicy+Rice" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah|Spicy+Rice" rel="stylesheet">
+    <!--end of google font-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <!-- Firebase Reference -->
     <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
@@ -49,16 +53,15 @@
     <header class="mdl-layout__header">
         <div class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-grid">
             <div class="mdl-layout__header-row mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-desktop">
-                <h3><i class="material-icons">chat_bubble_outline</i> Why Go Alone!?</h3>
+                <h2><i class="material-icons">chat_bubble_outline</i> Why Go Alone!?</h2>
             </div>
-            
             <div id="user-container">
                 <div hidden id="user-pic"></div>
                 <div hidden id="user-name"></div>
-                <button hidden id="sign-out" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--white">
+                <button hidden id="sign-out" class="mdl-button mdl-js-button mdl-js-ripple-effect">
                     Sign-out
                 </button>
-                <button hidden id="sign-in" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--white">
+                <button hidden id="sign-in" class="mdl-button mdl-js-button mdl-js-ripple-effect">
                     <i class="material-icons">account_circle</i>Sign-in with Google
                 </button>
             </div>
@@ -70,20 +73,22 @@
     <div class="container interests">
         <div class="row">
             <div class="col-sm-3">
-                <div class="panel panel-default">
-                    <div class="panel-heading">What are you interested in?</div>
+                <div class="panel panel-default" id="btnBox">
+                    <div class="panel-heading" id="headingArea">
+                        <h4>What are you interested in?</h4></div>
                     <div class="panel-body">
                         <!--Render Buttons -->
                         <div id="interestView"></div>
                     </div>
                 </div>
                 <div class="panel panel-default">
-                    <div class="panel-heading">Name your activity</div>
+                    <div class="panel-heading" id="headingArea">
+                        <h4> Name your activity</h4></div>
                     <div class="panel-body">
                         <form id="interestForm">
                             <div class="form-group">
                                 <label for="interestInput">
-                                    <h4>Add an interest</h4></label>
+                                    <h4 id=blackColor>Add an interest</h4></label>
                                 <input type="text" id="interestInput" class="form-control" placeholder="tell me your interest">
                                 <br>
                                 <input id="addInterest" type="submit" class="btn btn-primary" value="Add">
@@ -94,21 +99,23 @@
             </div>
             <!-- end of left panel -->
             <div class="col-sm-6">
-                <div class="panel panel-default" style=margin-bottom: 100px"">
-                    <div class="panel-heading">Your Location</div>
+                <div class="panel panel-default" id="panelBox">
+                    <div class="panel-heading" id="headingArea">
+                        <h4>Your Location</h4></div>
                     <div class="panel-body" id="map">
                         <!-- Map is Here -->
                         <div class="panel-body text-center" id="map">
-                            <p style="margin-top: 25px">Click on an interest to find things to do with people near you!</p>
+                            <p>Click on an interest to find things to do with people near you!</p>
                         </div>
                     </div>
                 </div>
             </div>
             <!-- end of map -->
             <div class="col-sm-3">
-                <div class="panel panel-default" style="margin-bottom: 100px">
-                    <div class="panel-heading">Chatter</div>
-                    <div class="panel-body" id="chat" style='height: 500px; padding: 0px'>
+                <div class="panel panel-default" id="panelBox">
+                    <div class="panel-heading" id="headingArea">
+                        <h4>Chatter</h4></div>
+                    <div class="panel-body" id="chat">
                         <div class="mdl-card__supporting-text mdl-color-text--grey-600">
                             <div id="messages">
                                 <span id="message-filler"></span>
@@ -138,33 +145,12 @@
             </div>
         </div>
         <!--end of row -->
-        <!-- Nav bar -->
-        <nav class="navbar navbar-inverse navbar-fixed-bottom" role="navigation">
-            <div class="container">
-                <!-- Brand and toggle get grouped for better mobile display -->
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand">@ Copyright 2016 whygoalone.com</a>
-                </div>
-                <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav">
-                        <li>
-                            <a href="#">About</a>
-                        </li>
-                        <li>
-                            <a href="#">Contact</a>
-                        </li>
-                    </ul>
-                </div>
-                <!-- /.navbar-collapse -->
+        <!-- footer -->
+        <footer class="navbar navbar-inverse navbar-fixed-bottom">
+            <div class="container-fluid">
+                <a>@ Copyright 2016 whygoalone.com</a>
             </div>
-            <!-- /.container -->
-        </nav>
+        </footer>
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6as3rvHxfYoYeZ00Qk-6hFyY0qm0LQGc&libraries=places" async defer></script>
         <!--     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6as3rvHxfYoYeZ00Qk-6hFyY0qm0LQGc&libraries=places&callback=initMap" async defer></script> -->
         <!-- <script id="addGoogle" async defer src=""></script> -->
