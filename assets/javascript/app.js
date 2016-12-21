@@ -111,13 +111,19 @@ $(document).ready(function() {
     //     }
     // });
 
-    usersDatabase.ref("/users").on("value", function(snap) {
+    usersDatabase.ref("/users").on("child_added", function(snap) {
         console.log("hello");
         var len = snap.numChildren();
         console.log(len);
-        var deepRef = ref.child(key).child(deepSnap.key());
-        
+        var key = snap.key; //"ada"
+        var name = snap.val().name;
+        console.log("Key = " + key + "Name = " + name);
+        var childKey = snap.child(); //"last"
+        console.log("Childkey = " + childKey);
     });
+
+    // });
+
 
     function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
