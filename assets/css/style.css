@@ -11,6 +11,11 @@
 	border-color: #cfcfea;
 }
 
+#pizzaImg{
+	height: 60%;
+	width: 60%;
+
+}
 #addInterest
 {
 	background-color: #fe5d26;
@@ -21,10 +26,11 @@
 .mdl-layout__header{
 	background-color: #fe5d26; 
 	color: white;
+	height: 140px;
 }
 
 #user-container{
-	margin: 20px;
+	margin: 50px;
 }
 #map{
 	height: 500px; 
@@ -57,6 +63,7 @@ h4{
 }
 #headingArea{
 	background-color: #fe5d26;
+	text-align: center;
 }
 
 p {
@@ -74,10 +81,9 @@ p {
 #panelBox{
 	margin-bottom: 100px;
 }
-
-/*.panel-default{
-	margin-bottom: 50px;
-}*/
+#logoArea{
+	max-width: 3000px;
+}
 
 footer{
 	text-align: center;
