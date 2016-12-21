@@ -100,23 +100,13 @@ $(document).ready(function() {
         }
     };
 
-    // usersDatabase.ref("/users").on("value", function(snap) {
-    //     console.log("hello");
-    //     var len = snap.numChildren();
-    //     console.log(len);
-    //     for(var i = 0; i < len; i++) {
-    //         for(key in snap) {
-    //             console.log(key);
-    //         }
-    //     }
-    // });
-
     usersDatabase.ref("/users").on("value", function(snap) {
         console.log("hello");
         var len = snap.numChildren();
         console.log(len);
-        var deepRef = ref.child(key).child(deepSnap.key());
-        
+        for(child in snap) {
+            console.log(snap.child);
+        }
     });
 
     function initMap() {
