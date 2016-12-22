@@ -94,10 +94,9 @@ $(document).ready(function() {
         var userMarker = new google.maps.Marker({
             map: map,
             position: user,
-            icon: iconBase + 'blu-circle.png'
+            icon: 'http://www.polyvore.com/cgi/img-thing?.out=jpg&size=l&tid=9431426'
         });
-        userMarker.name = "You are here";
-
+       
         console.log("request: ");
         console.log(request);
 
