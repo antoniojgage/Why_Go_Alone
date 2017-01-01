@@ -35,7 +35,8 @@ $(document).ready(function() {
         if (currentUser) {
             uid = currentUser.uid;
             usersDatabase.ref("/users").on("value", function(snap) {
-                if (snap.child("uid") === uid) {
+                if (snap.child("uid").val() === uid) {
+                    console.log(snap.child("uid").val());
                     alert("Josh already exists");
                 } else {
                     var newUser = usersDatabase.ref("users").push({
@@ -43,6 +44,7 @@ $(document).ready(function() {
                         uid: uid,
                         interests: ["sushi", "pizza", "movie"]
                     });
+                    return;
                 }
             });
         } 
