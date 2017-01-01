@@ -31,12 +31,9 @@ $(document).ready(function() {
 
     var currentUser = firebase.auth().currentUser;
 
-    if (currentUser != null) {
-        uid = currentUser.uid;
-    }
-
     firebase.auth().onAuthStateChanged(function(currentUser) {
         if (currentUser) {
+            uid = currentUser.uid;
             usersDatabase.ref("/users").on("value", function(snap) {
                 if (snap.child("uid") === uid) {
                     alert("Josh already exists");
