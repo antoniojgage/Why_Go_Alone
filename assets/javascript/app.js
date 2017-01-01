@@ -31,7 +31,7 @@ $(document).ready(function() {
 
     var currentUser = firebase.auth().currentUser;
 
-    var firebaseUsers = Firebase("users");
+    var firebaseUsers = usersDatabase.ref("/users");
     firebaseUsers.remove();
 
     firebase.auth().onAuthStateChanged(function(currentUser) {
