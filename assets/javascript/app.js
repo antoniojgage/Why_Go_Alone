@@ -21,27 +21,35 @@ $(document).ready(function() {
     var currentInterest;
     var latitude;
     var longitude;
-    var numPeople = 0;
+    var numPeople;
+    var uid;
 
     var user = {
         lat: latitude,
         lng: longitude
     };
 
-    // usersDatabase.ref().set({
-    //     users: {}
-    // });
+    var currentUser = firebase.auth().currentUser;
 
-    // if ("josh exists"){
-    //     alert("Josh already exists");
-    // } else {
-    var newUser = usersDatabase.ref("users").push({
-        name: "Mary",
-        interests: ["sushi", "pets", "movie"]
+    if (currentUser != null) {
+        uid = currentUser.uid;
+    }
+
+    firebase.auth().onAuthStateChanged(function(currentUser) {
+        if (currentUser) {
+            usersDatabase.ref("/users").on("value", function(snap) {
+                if (snap.child("uid") === uid) {
+                    alert("Josh already exists");
+                } else {
+                    var newUser = usersDatabase.ref("users").push({
+                        name: "Josh",
+                        uid: uid,
+                        interests: ["sushi", "pizza", "movie"]
+                    });
+                }
+            });
+        } 
     });
-    // }
-
-    var userKey = newUser.path.o[1];
 
     //Generic function display the interests
     function renderButton() {
@@ -55,7 +63,7 @@ $(document).ready(function() {
             //jQuery
             $("#interestView").append(newButton);
         }
-    }
+    };
 
     renderButton();
 
@@ -91,39 +99,33 @@ $(document).ready(function() {
 
     function selectInterest() {
         currentInterest = $(this).data("name");
+        numPeople = 0;
         if (interests.indexOf(currentInterest) !== -1) {
             if (latitude === undefined || longitude === undefined) {
+                checkDatabase();
                 geoFindMe();
             } else {
+                checkDatabase();
                 initMap();
             }
         }
     };
 
-    // usersDatabase.ref("/users").on("value", function(snap) {
-    //     console.log("hello");
-    //     var len = snap.numChildren();
-    //     console.log(len);
-    //     for(var i = 0; i < len; i++) {
-    //         for(key in snap) {
-    //             console.log(key);
-    //         }
-    //     }
-    // });
 
-    usersDatabase.ref("/users").on("child_added", function(snap) {
-        console.log("hello");
-        var len = snap.numChildren();
-        console.log(len);
-        var key = snap.key; //"ada"
-        var name = snap.val().name;
-        console.log("Key = " + key + "Name = " + name);
-        var childKey = snap.child(); //"last"
-        console.log("Childkey = " + childKey);
-    });
-
-    // });
-
+    function checkDatabase() {
+        usersDatabase.ref("/users").on("child_added", function(snap) {
+            var len = snap.numChildren();
+            console.log(len);
+            var key = snap.key; //"ada"
+            var name = snap.val().name;
+            var interestList = snap.val().interests;
+            if (interestList.indexOf(currentInterest) !== -1) {
+                numPeople++;
+            }
+            console.log("Key = " + key + " Name = " + name);
+            console.log(interestList);
+        });
+    };
 
     function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
@@ -157,14 +159,14 @@ $(document).ready(function() {
         var infoWindow = new google.maps.InfoWindow({ map: map });
         var service = new google.maps.places.PlacesService(map);
         service.textSearch(request, callback);
-    }
+    };
 
     function handleLocationError(browserHasGeolocation, infoWindow, pos) {
         infoWindow.setPosition(pos);
         infoWindow.setContent(browserHasGeolocation ?
             'Error: The Geolocation service failed.' :
             'Error: Your browser doesn\'t support geolocation.');
-    }
+    };
 
     function callback(results, status) {
         if (status === google.maps.places.PlacesServiceStatus.OK) {
@@ -172,7 +174,7 @@ $(document).ready(function() {
                 createMarker(results[i]);
             }
         }
-    }
+    };
 
     function createMarker(place) {
         var placeLoc = place.geometry.location;
@@ -187,7 +189,7 @@ $(document).ready(function() {
             infowindow.open(map, this);
         });
 
-    }
+    };
 
     function addMarker(feature) {
         var marker = new google.maps.Marker({
@@ -195,7 +197,7 @@ $(document).ready(function() {
             icon: icons[feature.type].icon,
             map: map
         });
-    }
+    };
     //START OF GEOLOCATION CODING
     function geoFindMe() {
         var output = document.getElementById("out");
@@ -213,15 +215,15 @@ $(document).ready(function() {
             console.log(user);
             console.log("Calling InitMap");
             initMap();
-        }
+        };
 
         function error() {
             console.log("Error retreiving location");
-        }
+        };
 
         console.log("Success Being called now!");
         navigator.geolocation.getCurrentPosition(success, error);
-    }
+    };
 
     $(document).on("click", ".interestButton", selectInterest);
     $(document).on("click", ".closeInterest", closeInterest);
