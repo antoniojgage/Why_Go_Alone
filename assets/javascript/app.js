@@ -31,6 +31,9 @@ $(document).ready(function() {
 
     var currentUser = firebase.auth().currentUser;
 
+    var firebaseUsers = Firebase("users");
+    firebaseUsers.remove();
+
     firebase.auth().onAuthStateChanged(function(currentUser) {
         if (currentUser) {
             uid = currentUser.uid;
@@ -39,12 +42,11 @@ $(document).ready(function() {
                     console.log(snap.child("uid").val());
                     alert("Josh already exists");
                 } else {
-                    var newUser = usersDatabase.ref("users").push({
-                        name: "Josh",
-                        uid: uid,
-                        interests: ["sushi", "pizza", "movie"]
-                    });
-                    return;
+                    // var newUser = usersDatabase.ref("users").push({
+                    //     name: "Josh",
+                    //     uid: uid,
+                    //     interests: ["sushi", "pizza", "movie"]
+                    // });
                 }
             });
         } 
