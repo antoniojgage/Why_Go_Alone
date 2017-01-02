@@ -43,15 +43,15 @@ $(document).ready(function() {
                 console.log(snap.val().uid);
                 if (snap.val().uid === uid) {
                     alert("This user already exists");
+                    return;
+                } else {
+                    // how do i make this not an infinite loop?!
+                    // var newUser = usersDatabase.ref("users").push({
+                    //     name: user_name,
+                    //     uid: uid,
+                    //     interests: ["sushi", "pizza", "movie"]
+                    // });
                 }
-                //  else {
-                //     how do i make this not an infinite loop?!
-                //     var newUser = usersDatabase.ref("users").push({
-                //         name: user_name,
-                //         uid: uid,
-                //         interests: ["sushi", "pizza", "movie"]
-                //     });
-                // }
             });
         } 
     });
