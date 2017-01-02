@@ -31,13 +31,10 @@ $(document).ready(function() {
 
     var currentUser = firebase.auth().currentUser;
 
-    var firebaseUsers = usersDatabase.ref("/users");
-    firebaseUsers.remove();
-
     firebase.auth().onAuthStateChanged(function(currentUser) {
         if (currentUser) {
             uid = currentUser.uid;
-            usersDatabase.ref("/users").on("value", function(snap) {
+            usersDatabase.ref("/users").on("child_added", function(snap) {
                 if (snap.child("uid").val() === uid) {
                     console.log(snap.child("uid").val());
                     alert("Josh already exists");
