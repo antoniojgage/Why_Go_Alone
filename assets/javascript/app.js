@@ -23,6 +23,7 @@ $(document).ready(function() {
     var longitude;
     var numPeople;
     var uid;
+    var user_name;
 
     var user = {
         lat: latitude,
@@ -35,20 +36,20 @@ $(document).ready(function() {
         if (currentUser) {
             console.log("there is a user");
             uid = currentUser.uid;
+            user_name = currentUser.displayName;
             console.log(uid);
             usersDatabase.ref("/users").on("child_added", function(snap) {
                 console.log("checking uid");
                 console.log(snap.val().uid);
-                // if (snap.child("uid").val() === uid) {
-                //     console.log(snap.child("uid").val());
-                //     alert("Josh already exists");
-                // } else {
-                //     var newUser = usersDatabase.ref("users").push({
-                //         name: "Josh",
-                //         uid: uid,
-                //         interests: ["sushi", "pizza", "movie"]
-                //     });
-                // }
+                if (snap.val().uid === uid) {
+                    alert("This user already exists");
+                } else {
+                    var newUser = usersDatabase.ref("users").push({
+                        name: user_name,
+                        uid: uid,
+                        interests: ["sushi", "pizza", "movie"]
+                    });
+                }
             });
         } 
     });
