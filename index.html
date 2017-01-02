@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html style="height: 100%">
+
+<head>
+    <meta charset="=utf-8">
+    <!-- Latest compiled and minified CSS -->
+    <!--Simple bootstrap style for easier layout -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!--google font-->
+    <link href="https://fonts.googleapis.com/css?family=Spicy+Rice" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah|Spicy+Rice" rel="stylesheet">
+    <!--end of google font-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <!-- Firebase Reference -->
+    <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+    <!-- Link to Moment.js should go here -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script>
+    <!-- adding Chat code Michelle -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Learn how to use the Firebase platform on the Web">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Disable tap highlight on IE -->
+    <meta name="msapplication-tap-highlight" content="no">
+    <!-- Web Application Manifest -->
+    <link rel="manifest" href="manifest.json">
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="Friendly Chat">
+    <meta name="theme-color" content="#303F9F">
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Friendly Chat">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#303F9F">
+    <!-- Tile icon for Win8 -->
+    <meta name="msapplication-TileColor" content="#3372DF">
+    <meta name="msapplication-navbutton-color" content="#303F9F">
+    <!-- Material Design Lite -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.orange-indigo.min.css">
+    <script defer src="https://code.getmdl.io/1.1.3/material.min.js"></script>
+    <!-- App Styling -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
+    <!-- CSS link -->
+    <link rel="stylesheet" type="text/css" href="assets/css/main.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <title>Why Go Alone?</title>
+</head>
+
+<body>
+    <!--  <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-header"> -->
+    <!-- Header section containing logo -->
+    <header class="mdl-layout__header">
+        <div class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-grid" id="logoArea">
+            <div class="mdl-layout__header-row mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-desktop">
+                <h2><img id="pizzaImg" src="assets/images/pizzalogo.png"></h2>
+            </div>
+            <div id="user-container">
+                <div hidden id="user-pic"></div>
+                <div hidden id="user-name"></div>
+                <button hidden id="sign-out" class="mdl-button mdl-js-button mdl-js-ripple-effect">
+                    Sign-out
+                </button>
+                <button hidden id="sign-in" class="mdl-button mdl-js-button mdl-js-ripple-effect">
+                    <i class="material-icons">account_circle</i>Sign-in with Google
+                </button>
+            </div>
+        </div>
+    </header>
+    <br>
+    <!-- </div> -->
+    <!-- panel & main body -->
+    <div class="container interests">
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="panel panel-default" id="btnBox">
+                    <div class="panel-heading" id="headingArea">
+                        <h4>What are you interested in?</h4></div>
+                    <div class="panel-body">
+                        <!--Render Buttons -->
+                        <div id="interestView"></div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading" id="headingArea">
+                        <h4> Name your activity</h4></div>
+                    <div class="panel-body">
+                        <form id="interestForm">
+                            <div class="form-group">
+                                <label for="interestInput">
+                                    <h4 id=blackColor>Add an interest</h4></label>
+                                <input type="text" id="interestInput" class="form-control" placeholder="tell me your interest">
+                                <br>
+                                <input id="addInterest" type="submit" class="btn btn-primary" value="Add">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- end of left panel -->
+            <div class="col-sm-6">
+
+                <div class="panel panel-default" id="panelBox">
+                    <div class="panel-heading" id="headingArea">
+                        <h4>Your Location</h4></div>
+                    <div class="panel-body" id="map">
+
+                        <!-- Map is Here -->
+                        <div class="panel-body text-center" id="map">
+                            <p>Click on an interest to find things to do with people near you!</p>
+                        </div>
+                </div>
+            </div>
+            </div>
+            <!-- end of map -->
+            <div class="col-sm-3">
+                <div class="panel panel-default" id="panelBox">
+                    <div class="panel-heading" id="headingArea">
+                        <h4>Chatter</h4></div>
+                    <div class="panel-body" id="chat">
+                        <div class="mdl-card__supporting-text mdl-color-text--grey-600">
+                            <div id="messages">
+                                <span id="message-filler"></span>
+                            </div>
+                            <form id="message-form" action="#">
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                    <input class="mdl-textfield__input" type="text" id="message">
+                                    <label class="mdl-textfield__label" for="message">Message...</label>
+                                </div>
+                                <button id="submit" disabled type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+                                    Send
+                                </button>
+                            </form>
+                            <form id="image-form" action="#">
+                                <input id="mediaCapture" type="file" accept="image/*,capture=camera">
+                                <button id="submitImage" title="Add an image" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--amber-400 mdl-color-text--white">
+                                    <i class="material-icons">image</i>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                    <div id="must-signin-snackbar" class="mdl-js-snackbar mdl-snackbar">
+                        <div class="mdl-snackbar__text"></div>
+                        <button class="mdl-snackbar__action" type="button"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--end of row -->
+        <!-- footer -->
+        <footer class="navbar navbar-inverse navbar-fixed-bottom">
+            <div class="container-fluid">
+                <a>@ Copyright 2016 whygoalone.com</a>
+            </div>
+        </footer>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6as3rvHxfYoYeZ00Qk-6hFyY0qm0LQGc&libraries=places" async defer></script>
+        <!--     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6as3rvHxfYoYeZ00Qk-6hFyY0qm0LQGc&libraries=places&callback=initMap" async defer></script> -->
+        <!-- <script id="addGoogle" async defer src=""></script> -->
+        <script src="assets/javascript/main.js"></script>
+        <script src="assets/javascript/app.js"></script>
+</body>
+
+</html>
