@@ -38,16 +38,17 @@ $(document).ready(function() {
             console.log(uid);
             usersDatabase.ref("/users").on("child_added", function(snap) {
                 console.log("checking uid");
-                if (snap.child("uid").val() === uid) {
-                    console.log(snap.child("uid").val());
-                    alert("Josh already exists");
-                } else {
-                    // var newUser = usersDatabase.ref("users").push({
-                    //     name: "Josh",
-                    //     uid: uid,
-                    //     interests: ["sushi", "pizza", "movie"]
-                    // });
-                }
+                console.log(snap.val().child().uid);
+                // if (snap.child("uid").val() === uid) {
+                //     console.log(snap.child("uid").val());
+                //     alert("Josh already exists");
+                // } else {
+                //     var newUser = usersDatabase.ref("users").push({
+                //         name: "Josh",
+                //         uid: uid,
+                //         interests: ["sushi", "pizza", "movie"]
+                //     });
+                // }
             });
         } 
     });
