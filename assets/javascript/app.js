@@ -33,8 +33,11 @@ $(document).ready(function() {
 
     firebase.auth().onAuthStateChanged(function(currentUser) {
         if (currentUser) {
+            console.log("there is a user");
             uid = currentUser.uid;
+            console.log(uid);
             usersDatabase.ref("/users").on("child_added", function(snap) {
+                console.log("checking uid");
                 if (snap.child("uid").val() === uid) {
                     console.log(snap.child("uid").val());
                     alert("Josh already exists");
