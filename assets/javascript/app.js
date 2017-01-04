@@ -16,7 +16,7 @@ $(document).ready(function() {
     var usersDatabase = usersApp.database();
 
     //array of interests
-    var interests = ["pizza", "movie", "bowling"];
+    var interests;
     var map;
     var infowindow;
     //userRadius not being used yet
@@ -46,7 +46,8 @@ $(document).ready(function() {
         } else {
             console.log('user ' + uid + 'already exists!');
             usersDatabase.ref().child("users").child(uid).on('value', function(snapshot) {
-                console.log(snapshot.val().interests);
+                interests = snapshot.val().interests;
+                renderButton();
             });
         }
     }
@@ -81,7 +82,7 @@ $(document).ready(function() {
         }
     };
 
-    renderButton();
+    // renderButton();
 
     //handle when one button is clicked
     $("#addInterest").on("click", function() {
