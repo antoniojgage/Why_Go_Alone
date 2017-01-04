@@ -41,7 +41,7 @@ $(document).ready(function() {
         if (doesNotExist) {
             usersDatabase.ref().child("users").child(uid).set({ 
                 name: user_name, 
-                interests: ["Pizza", "Movie", "Bowling"] 
+                interests: ["PIZZA", "MOVIE", "BOWLING"] 
             });
         } else {
             console.log('user ' + uid + 'already exists!');
