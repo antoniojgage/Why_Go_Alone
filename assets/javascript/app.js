@@ -150,8 +150,8 @@ $(document).ready(function() {
             }
             console.log("Key = " + key + " Name = " + name);
             console.log(interestList);
+            initMap();
         });
-        initMap();
     };
 
     function initMap() {
