@@ -69,7 +69,7 @@ $(document).ready(function() {
             user_name = currentUser.displayName;
             console.log(uid);
             var usersRef = new Firebase(usersDatabase);
-            usersRef.child("uid").child(uid).once("value", function(snap) {
+            usersRef.child("K_bF30NNgZaVrn6pydW").once("value", function(snap) {
                 console.log("checking uid");
                 console.log(snap.val());
                 // if (snap.val().uid === uid) {
