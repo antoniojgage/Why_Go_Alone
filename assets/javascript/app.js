@@ -90,7 +90,7 @@ $(document).ready(function() {
 
         //takes the input from the user typed in
         var currentInterest = $("#interestInput").val().trim();
-        currentInterest.toUpperCase();
+        currentInterest = currentInterest.toUpperCase();
         console.log(currentInterest);
 
         console.log(currentInterest + " is added to the Array");
