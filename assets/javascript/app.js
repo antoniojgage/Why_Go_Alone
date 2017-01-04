@@ -13,6 +13,8 @@ $(document).ready(function() {
 
     var usersDatabase = "https://why-go-alone.firebaseio.com/users";
 
+    var usersRef = new Firebase(usersDatabase);
+
     //array of interests
     var interests = ["pizza", "movie", "bowling"];
     var map;
@@ -66,7 +68,7 @@ $(document).ready(function() {
             uid = currentUser.uid;
             user_name = currentUser.displayName;
             console.log(uid);
-            usersDatabase.child(uid).once("value", function(snap) {
+            usersRef.child(uid).once("value", function(snap) {
                 console.log("checking uid");
                 console.log(snap.val());
                 // if (snap.val().uid === uid) {
