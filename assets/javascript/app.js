@@ -65,20 +65,20 @@ $(document).ready(function() {
             uid = currentUser.uid;
             user_name = currentUser.displayName;
             console.log(uid);
-            usersDatabase.ref("/uid").once("value", function(snap) {
+            usersDatabase.child(uid).once("value", function(snap) {
                 console.log("checking uid");
-                console.log(snap.val().uid);
-                if (snap.val().uid === uid) {
-                    alert("This user already exists");
-                } else {
-                    console.log("entering push" + infinityCount);
-                    infinityCount++;
-                    newUser = usersDatabase.ref("users").push({
-                        name: user_name,
-                        uid: uid,
-                        interests: ["pizza", "movie", "bowling"]
-                    });
-                }
+                console.log(snap.val());
+                // if (snap.val().uid === uid) {
+                //     alert("This user already exists");
+                // } else {
+                //     console.log("entering push" + infinityCount);
+                //     infinityCount++;
+                //     newUser = usersDatabase.ref("users").push({
+                //         name: user_name,
+                //         uid: uid,
+                //         interests: ["pizza", "movie", "bowling"]
+                //     });
+                // }
             });
         } else {
             console.log("there is no user");
