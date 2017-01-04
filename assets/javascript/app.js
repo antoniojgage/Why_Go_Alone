@@ -82,8 +82,6 @@ $(document).ready(function() {
         }
     };
 
-    // renderButton();
-
     //handle when one button is clicked
     $("#addInterest").on("click", function() {
         console.log("Submit button is clicked");
@@ -135,6 +133,10 @@ $(document).ready(function() {
                 initMap();
             }
         }
+        usersDatabase.ref("/users").on("child_added", function(snap) {
+            console.log("hello");
+            initMap();
+        }); 
     };
 
     //TODO change this to listen to changes in people's interstes rather than users added
@@ -150,13 +152,9 @@ $(document).ready(function() {
             }
             console.log("Key = " + key + " Name = " + name);
             console.log(interestList);
-        });
-    };
 
-    // usersDatabase.ref("/users").on("child_added", function(snap) {
-    //     console.log("hello");
-    //     initMap();
-    // });   
+        });
+    };  
 
     function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
