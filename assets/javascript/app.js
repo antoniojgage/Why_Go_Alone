@@ -94,7 +94,9 @@ $(document).ready(function() {
         console.log(currentInterest + " is added to the Array");
         if (currentInterest != "") {
             interests.push(currentInterest);
-
+            usersDatabase.ref().child("users").child(uid).child("interests").set({ 
+                interests: interests
+            });
             $("#interestInput").val("");
             $("#interestInput").attr("placeholder", "tell me your interest");
             renderButton();
@@ -107,6 +109,9 @@ $(document).ready(function() {
     function closeInterest() {
         var index = interests.indexOf($(this).parent().attr("data-name"));
         interests.splice(index, 1);
+        //TODO
+        //wipe array from database
+        //push new array to database
         $("#map").html($("<p style='margin-top: 25px'>Click on an interest to find things to do with people near you!</p>"));
         renderButton();
         if (interests.indexOf(currentInterest) !== -1) {
@@ -128,7 +133,7 @@ $(document).ready(function() {
         }
     };
 
-
+    //TODO change this to listen to changes in people's interstes rather than users added
     function checkDatabase() {
         usersDatabase.ref("/users").on("child_added", function(snap) {
             var len = snap.numChildren();
