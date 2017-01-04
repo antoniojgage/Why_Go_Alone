@@ -48,9 +48,9 @@ $(document).ready(function() {
                     var newUser = usersDatabase.ref("users").push({
                         name: user_name,
                         uid: uid,
-                        interests: ["sushi", "pizza", "movie"]
-                        return;
+                        interests: ["sushi", "pizza", "movie"] 
                     });
+                    return;
                 }
             });
         } else {
