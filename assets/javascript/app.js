@@ -94,6 +94,7 @@ $(document).ready(function() {
         console.log(currentInterest + " is added to the Array");
         if (currentInterest != "") {
             interests.push(currentInterest);
+            //wipe array from database and push new array to database
             usersDatabase.ref().child("users").child(uid).set({ 
                 interests: interests
             });
@@ -109,9 +110,10 @@ $(document).ready(function() {
     function closeInterest() {
         var index = interests.indexOf($(this).parent().attr("data-name"));
         interests.splice(index, 1);
-        //TODO
-        //wipe array from database
-        //push new array to database
+        //wipe array from database and push new array to database
+        usersDatabase.ref().child("users").child(uid).set({ 
+            interests: interests
+        });
         $("#map").html($("<p style='margin-top: 25px'>Click on an interest to find things to do with people near you!</p>"));
         renderButton();
         if (interests.indexOf(currentInterest) !== -1) {
