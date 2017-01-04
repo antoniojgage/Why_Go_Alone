@@ -35,33 +35,6 @@ $(document).ready(function() {
     var infinityCount = 0;
     var userObject;
 
-    // newUser = usersDatabase.ref("users").push({
-    //     name: "Kit",
-    //     uid: 234,
-    //     interests: ["bowling", "pizza", "movie"]
-    // });
-
-    // newUser = usersDatabase.ref("users").push({
-    //     name: "Chris",
-    //     uid: 345,
-    //     interests: ["sushi", "pizza", "vodka"]
-    // });
-
-    // newUser = usersDatabase.ref("users").push({
-    //     name: "Michelle",
-    //     uid: 456,
-    //     interests: ["shopping", "pizza", "movie"]
-    // });
-
-    // var newUser = usersDatabase.ref("users").push({
-    //     name: "Mary Willis",
-    //     uid: "gEVPigE8R5UjjsCzb74KKEajVa43",
-    //     interests: ["sushi", "pizza", "shopping"]
-    // });
-
-
-    // usersDatabase.ref().push({ "first_name": "rob", "age": 28 });
-
     var currentUser = firebase.auth().currentUser;
 
     function createUser(uid, doesNotExist) {
@@ -72,6 +45,9 @@ $(document).ready(function() {
             });
         } else {
             console.log('user ' + uid + 'already exists!');
+            usersDatabase.ref().child("users").child(uid).on('value', function(snapshot) {
+                console.log(snapshot.val().interests);
+            });
         }
     }
 
