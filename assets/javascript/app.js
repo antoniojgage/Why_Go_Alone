@@ -45,15 +45,17 @@ $(document).ready(function() {
                     alert("This user already exists");
                     return;
                 } else {
-                    // how do i make this not an infinite loop?!
-                    // var newUser = usersDatabase.ref("users").push({
-                    //     name: user_name,
-                    //     uid: uid,
-                    //     interests: ["sushi", "pizza", "movie"]
-                    // });
+                    var newUser = usersDatabase.ref("users").push({
+                        name: user_name,
+                        uid: uid,
+                        interests: ["sushi", "pizza", "movie"]
+                        return;
+                    });
                 }
             });
-        } 
+        } else {
+            console.log("there is no user");
+        }
     });
 
     //Generic function display the interests
@@ -161,7 +163,6 @@ $(document).ready(function() {
 
         infowindow = new google.maps.InfoWindow();
 
-        var infoWindow = new google.maps.InfoWindow({ map: map });
         var service = new google.maps.places.PlacesService(map);
         service.textSearch(request, callback);
     };
