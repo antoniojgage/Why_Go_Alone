@@ -94,7 +94,7 @@ $(document).ready(function() {
         console.log(currentInterest + " is added to the Array");
         if (currentInterest != "") {
             interests.push(currentInterest);
-            usersDatabase.ref().child("users").child(uid).child("interests").set({ 
+            usersDatabase.ref().child("users").child(uid).set({ 
                 interests: interests
             });
             $("#interestInput").val("");
