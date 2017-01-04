@@ -12,8 +12,8 @@ $(document).ready(function() {
 
     var usersApp = firebase.initializeApp(config, "users-database");
 
-    var usersDatabase = 'https://why-go-alone.firebaseio.com/users';
-    // var usersDatabase = usersApp.database();
+    // var usersDatabase = 'https://why-go-alone.firebaseio.com/users';
+    var usersDatabase = usersApp.database();
 
     //array of interests
     var interests = ["pizza", "movie", "bowling"];
@@ -59,6 +59,8 @@ $(document).ready(function() {
     //     interests: ["sushi", "pizza", "shopping"]
     // });
 
+    
+    // usersDatabase.ref().push({ "first_name": "rob", "age": 28 });
 
     var currentUser = firebase.auth().currentUser;
 
@@ -68,22 +70,10 @@ $(document).ready(function() {
             uid = currentUser.uid;
             user_name = currentUser.displayName;
             console.log(uid);
-            var usersRef = new Firebase(usersDatabase);
-            usersRef.child("-K_bF30NNgZaVrn6pydW").once("value", function(snap) {
-                console.log("checking uid");
-                console.log(snap.val());
-                // if (snap.val().uid === uid) {
-                //     alert("This user already exists");
-                // } else {
-                //     console.log("entering push" + infinityCount);
-                //     infinityCount++;
-                //     newUser = usersDatabase.ref("users").push({
-                //         name: user_name,
-                //         uid: uid,
-                //         interests: ["pizza", "movie", "bowling"]
-                //     });
-                // }
-            });
+            usersDatabase.ref().child("users").child(uid).set({ name: "Mary Willis", interests: ["sushi", "pizza", "shopping"] });
+            // usersDatabase.ref().child("users").child(uid).on('value', function(snapshot) { 
+            //     console.log("user exists")
+            // });
         } else {
             console.log("there is no user");
         }
