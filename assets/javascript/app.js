@@ -133,10 +133,6 @@ $(document).ready(function() {
                 initMap();
             }
         }
-        usersDatabase.ref("/users").on("child_added", function(snap) {
-            console.log("hello");
-            initMap();
-        }); 
     };
 
     //TODO change this to listen to changes in people's interstes rather than users added
