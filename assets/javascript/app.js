@@ -29,6 +29,37 @@ $(document).ready(function() {
         lat: latitude,
         lng: longitude
     };
+    var infinityCount = 0;
+
+    // var newUser = usersDatabase.ref("users").push({
+    //     name: "Mary",
+    //     uid: 123,
+    //     interests: ["sushi", "pizza", "movie"]
+    // });
+
+    // newUser = usersDatabase.ref("users").push({
+    //     name: "Kit",
+    //     uid: 234,
+    //     interests: ["bowling", "pizza", "movie"]
+    // });
+
+    // newUser = usersDatabase.ref("users").push({
+    //     name: "Chris",
+    //     uid: 345,
+    //     interests: ["sushi", "pizza", "vodka"]
+    // });
+
+    // newUser = usersDatabase.ref("users").push({
+    //     name: "Michelle",
+    //     uid: 456,
+    //     interests: ["shopping", "pizza", "movie"]
+    // });
+
+    // newUser = usersDatabase.ref("users").push({
+    //     name: "Antonio",
+    //     uid: 567,
+    //     interests: ["sushi", "pizza", "shopping"]
+    // });
 
     var currentUser = firebase.auth().currentUser;
 
@@ -43,14 +74,14 @@ $(document).ready(function() {
                 console.log(snap.val().uid);
                 if (snap.val().uid === uid) {
                     alert("This user already exists");
-                    return;
                 } else {
-                    var newUser = usersDatabase.ref("users").push({
-                        name: user_name,
-                        uid: uid,
-                        interests: ["sushi", "pizza", "movie"] 
-                    });
-                    return;
+                    console.log("entering push" + infinityCount);
+                    infinityCount++;
+                    // var newUser = usersDatabase.ref("users").push({
+                    //     name: user_name,
+                    //     uid: uid,
+                    //     interests: ["sushi", "pizza", "movie"] 
+                    // });
                 }
             });
         } else {
