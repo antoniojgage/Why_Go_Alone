@@ -30,12 +30,8 @@ $(document).ready(function() {
         lng: longitude
     };
     var infinityCount = 0;
-
-    // var newUser = usersDatabase.ref("users").push({
-    //     name: "Mary",
-    //     uid: 123,
-    //     interests: ["sushi", "pizza", "movie"]
-    // });
+    var userObject;
+    var userNotYetAdded = true;
 
     // newUser = usersDatabase.ref("users").push({
     //     name: "Kit",
@@ -61,6 +57,7 @@ $(document).ready(function() {
     //     interests: ["sushi", "pizza", "shopping"]
     // });
 
+
     var currentUser = firebase.auth().currentUser;
 
     firebase.auth().onAuthStateChanged(function(currentUser) {
@@ -69,21 +66,24 @@ $(document).ready(function() {
             uid = currentUser.uid;
             user_name = currentUser.displayName;
             console.log(uid);
-            usersDatabase.ref("/users").on("child_added", function(snap) {
-                console.log("checking uid");
-                console.log(snap.val().uid);
-                if (snap.val().uid === uid) {
-                    alert("This user already exists");
-                } else {
-                    console.log("entering push" + infinityCount);
-                    infinityCount++;
-                    // var newUser = usersDatabase.ref("users").push({
-                    //     name: user_name,
-                    //     uid: uid,
-                    //     interests: ["sushi", "pizza", "movie"] 
-                    // });
-                }
-            });
+            if(userNotYetAdded) {
+                usersDatabase.ref("/users").on("child_added", function(snap) {
+                    console.log("checking uid");
+                    console.log(snap.val().uid);
+                    if (snap.val().uid === uid) {
+                        alert("This user already exists");
+                    } else {
+                        console.log("entering push" + infinityCount);
+                        infinityCount++;
+                        newUser = usersDatabase.ref("users").push({
+                            name: user_name,
+                            uid: uid,
+                            interests: ["pizza", "movie", "bowling"] 
+                        });
+                        userNotYetAdded = false;
+                    }
+                });
+            }
         } else {
             console.log("there is no user");
         }
