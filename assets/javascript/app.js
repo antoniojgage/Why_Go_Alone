@@ -153,10 +153,10 @@ $(document).ready(function() {
         });
     };
 
-    usersDatabase.ref("/users").on("child_added", function(snap) {
-        console.log("hello");
-        initMap();
-    });   
+    // usersDatabase.ref("/users").on("child_added", function(snap) {
+    //     console.log("hello");
+    //     initMap();
+    // });   
 
     function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
