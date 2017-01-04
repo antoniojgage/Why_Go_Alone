@@ -59,10 +59,22 @@ $(document).ready(function() {
     //     interests: ["sushi", "pizza", "shopping"]
     // });
 
-    
+
     // usersDatabase.ref().push({ "first_name": "rob", "age": 28 });
 
     var currentUser = firebase.auth().currentUser;
+
+    function createUser(uid, doesNotExist) {
+        if (doesNotExist) {
+            usersDatabase.ref().child("users").child(uid).set({ 
+                name: user_name, 
+                interests: ["pizza", "movie", "bowling"] 
+            });
+        } else {
+            alert('user ' + uid + 'already exists!');
+            // Do something here you want to do for first time users (Store data in database?)
+        }
+    }
 
     firebase.auth().onAuthStateChanged(function(currentUser) {
         if (currentUser) {
@@ -71,8 +83,9 @@ $(document).ready(function() {
             user_name = currentUser.displayName;
             console.log(uid);
             // usersDatabase.ref().child("users").child(uid).set({ name: "Mary Willis", interests: ["sushi", "pizza", "shopping"] });
-            usersDatabase.ref().child("users").child(uid).on('value', function(snapshot) { 
-                console.log("user exists")
+            usersDatabase.ref().child("users").child(uid).on('value', function(snapshot) {
+                var doesNotExist = (snapshot.val() === null);
+                createUser(uid, doesNotExist);
             });
         } else {
             console.log("there is no user");
