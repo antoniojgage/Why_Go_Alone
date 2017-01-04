@@ -9,9 +9,12 @@ $(document).ready(function() {
         storageBucket: "why-go-alone.appspot.com",
         messagingSenderId: "141733030000"
     };
+
     var usersApp = firebase.initializeApp(config, "users-database");
 
+    // var usersDatabase = 'https://why-go-alone.firebaseio.com/users';
     var usersDatabase = usersApp.database();
+
     //array of interests
     var interests = ["pizza", "movie", "bowling"];
     var map;
@@ -23,33 +26,69 @@ $(document).ready(function() {
     var longitude;
     var numPeople;
     var uid;
+    var user_name;
 
     var user = {
         lat: latitude,
         lng: longitude
     };
+    var infinityCount = 0;
+    var userObject;
+
+    // newUser = usersDatabase.ref("users").push({
+    //     name: "Kit",
+    //     uid: 234,
+    //     interests: ["bowling", "pizza", "movie"]
+    // });
+
+    // newUser = usersDatabase.ref("users").push({
+    //     name: "Chris",
+    //     uid: 345,
+    //     interests: ["sushi", "pizza", "vodka"]
+    // });
+
+    // newUser = usersDatabase.ref("users").push({
+    //     name: "Michelle",
+    //     uid: 456,
+    //     interests: ["shopping", "pizza", "movie"]
+    // });
+
+    // var newUser = usersDatabase.ref("users").push({
+    //     name: "Mary Willis",
+    //     uid: "gEVPigE8R5UjjsCzb74KKEajVa43",
+    //     interests: ["sushi", "pizza", "shopping"]
+    // });
+
+
+    // usersDatabase.ref().push({ "first_name": "rob", "age": 28 });
 
     var currentUser = firebase.auth().currentUser;
+
+    function createUser(uid, doesNotExist) {
+        if (doesNotExist) {
+            usersDatabase.ref().child("users").child(uid).set({ 
+                name: user_name, 
+                interests: ["pizza", "movie", "bowling"] 
+            });
+        } else {
+            console.log('user ' + uid + 'already exists!');
+        }
+    }
 
     firebase.auth().onAuthStateChanged(function(currentUser) {
         if (currentUser) {
             console.log("there is a user");
             uid = currentUser.uid;
+            user_name = currentUser.displayName;
             console.log(uid);
-            usersDatabase.ref("/users").on("child_added", function(snap) {
-                console.log("checking uid");
-                if (snap.child("uid").val() === uid) {
-                    console.log(snap.child("uid").val());
-                    alert("Josh already exists");
-                } else {
-                    // var newUser = usersDatabase.ref("users").push({
-                    //     name: "Josh",
-                    //     uid: uid,
-                    //     interests: ["sushi", "pizza", "movie"]
-                    // });
-                }
+            // usersDatabase.ref().child("users").child(uid).set({ name: "Mary Willis", interests: ["sushi", "pizza", "shopping"] });
+            usersDatabase.ref().child("users").child(uid).on('value', function(snapshot) {
+                var doesNotExist = (snapshot.val() === null);
+                createUser(uid, doesNotExist);
             });
-        } 
+        } else {
+            console.log("there is no user");
+        }
     });
 
     //Generic function display the interests
@@ -157,7 +196,6 @@ $(document).ready(function() {
 
         infowindow = new google.maps.InfoWindow();
 
-        var infoWindow = new google.maps.InfoWindow({ map: map });
         var service = new google.maps.places.PlacesService(map);
         service.textSearch(request, callback);
     };
