@@ -128,18 +128,18 @@ $(document).ready(function() {
         numPeople = 0;
         if (interests.indexOf(currentInterest) !== -1) {
             if (latitude === undefined || longitude === undefined) {
-                checkDatabase();
+                // checkDatabase();
                 geoFindMe();
             } else {
-                checkDatabase();
+                // checkDatabase();
                 initMap();
             }
         }
     };
 
     //TODO change this to listen to changes in people's interstes rather than users added
-    function checkDatabase() {
-        usersDatabase.ref("/users").on("child_added", function(snap) {
+    // function checkDatabase() {
+        usersDatabase.ref("/users").on("value", function(snap) {
             var len = snap.numChildren();
             console.log(len);
             var key = snap.key; //"ada"
@@ -150,9 +150,8 @@ $(document).ready(function() {
             }
             console.log("Key = " + key + " Name = " + name);
             console.log(interestList);
-            initMap();
         });
-    };
+    // };
 
     function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
