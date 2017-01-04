@@ -9,11 +9,10 @@ $(document).ready(function() {
         storageBucket: "why-go-alone.appspot.com",
         messagingSenderId: "141733030000"
     };
+
     var usersApp = firebase.initializeApp(config, "users-database");
 
-    var usersDatabase = "https://why-go-alone.firebaseio.com/users";
-
-    var usersRef = new Firebase(usersDatabase);
+    var usersDatabase = 'https://why-go-alone.firebaseio.com/users';
 
     //array of interests
     var interests = ["pizza", "movie", "bowling"];
@@ -68,6 +67,7 @@ $(document).ready(function() {
             uid = currentUser.uid;
             user_name = currentUser.displayName;
             console.log(uid);
+            var usersRef = new Firebase(usersDatabase);
             usersRef.child(uid).once("value", function(snap) {
                 console.log("checking uid");
                 console.log(snap.val());
