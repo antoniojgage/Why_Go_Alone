@@ -13,6 +13,7 @@ $(document).ready(function() {
     var usersApp = firebase.initializeApp(config, "users-database");
 
     var usersDatabase = 'https://why-go-alone.firebaseio.com/users';
+    // var usersDatabase = usersApp.database();
 
     //array of interests
     var interests = ["pizza", "movie", "bowling"];
@@ -52,9 +53,9 @@ $(document).ready(function() {
     //     interests: ["shopping", "pizza", "movie"]
     // });
 
-    // newUser = usersDatabase.ref("users").push({
-    //     name: "Antonio",
-    //     uid: 567,
+    // var newUser = usersDatabase.ref("users").push({
+    //     name: "Mary Willis",
+    //     uid: "gEVPigE8R5UjjsCzb74KKEajVa43",
     //     interests: ["sushi", "pizza", "shopping"]
     // });
 
