@@ -70,10 +70,10 @@ $(document).ready(function() {
             uid = currentUser.uid;
             user_name = currentUser.displayName;
             console.log(uid);
-            usersDatabase.ref().child("users").child(uid).set({ name: "Mary Willis", interests: ["sushi", "pizza", "shopping"] });
-            // usersDatabase.ref().child("users").child(uid).on('value', function(snapshot) { 
-            //     console.log("user exists")
-            // });
+            // usersDatabase.ref().child("users").child(uid).set({ name: "Mary Willis", interests: ["sushi", "pizza", "shopping"] });
+            usersDatabase.ref().child("users").child(uid).on('value', function(snapshot) { 
+                console.log("user exists")
+            });
         } else {
             console.log("there is no user");
         }
