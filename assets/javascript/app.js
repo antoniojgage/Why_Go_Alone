@@ -71,8 +71,7 @@ $(document).ready(function() {
                 interests: ["pizza", "movie", "bowling"] 
             });
         } else {
-            alert('user ' + uid + 'already exists!');
-            // Do something here you want to do for first time users (Store data in database?)
+            console.log('user ' + uid + 'already exists!');
         }
     }
 
