@@ -16,7 +16,7 @@ $(document).ready(function() {
     var usersDatabase = usersApp.database();
 
     //array of interests
-    var interests = ["pizza", "movie", "bowling"];
+    var interests;
     var map;
     var infowindow;
     //userRadius not being used yet
@@ -35,43 +35,20 @@ $(document).ready(function() {
     var infinityCount = 0;
     var userObject;
 
-    // newUser = usersDatabase.ref("users").push({
-    //     name: "Kit",
-    //     uid: 234,
-    //     interests: ["bowling", "pizza", "movie"]
-    // });
-
-    // newUser = usersDatabase.ref("users").push({
-    //     name: "Chris",
-    //     uid: 345,
-    //     interests: ["sushi", "pizza", "vodka"]
-    // });
-
-    // newUser = usersDatabase.ref("users").push({
-    //     name: "Michelle",
-    //     uid: 456,
-    //     interests: ["shopping", "pizza", "movie"]
-    // });
-
-    // var newUser = usersDatabase.ref("users").push({
-    //     name: "Mary Willis",
-    //     uid: "gEVPigE8R5UjjsCzb74KKEajVa43",
-    //     interests: ["sushi", "pizza", "shopping"]
-    // });
-
-
-    // usersDatabase.ref().push({ "first_name": "rob", "age": 28 });
-
     var currentUser = firebase.auth().currentUser;
 
     function createUser(uid, doesNotExist) {
         if (doesNotExist) {
             usersDatabase.ref().child("users").child(uid).set({ 
                 name: user_name, 
-                interests: ["pizza", "movie", "bowling"] 
+                interests: ["PIZZA", "MOVIE", "BOWLING"] 
             });
         } else {
             console.log('user ' + uid + 'already exists!');
+            usersDatabase.ref().child("users").child(uid).on('value', function(snapshot) {
+                interests = snapshot.val().interests;
+                renderButton();
+            });
         }
     }
 
@@ -105,19 +82,22 @@ $(document).ready(function() {
         }
     };
 
-    renderButton();
-
     //handle when one button is clicked
     $("#addInterest").on("click", function() {
         console.log("Submit button is clicked");
 
         //takes the input from the user typed in
         var currentInterest = $("#interestInput").val().trim();
+        currentInterest = currentInterest.toUpperCase();
+        console.log(currentInterest);
 
         console.log(currentInterest + " is added to the Array");
         if (currentInterest != "") {
             interests.push(currentInterest);
-
+            //wipe array from database and push new array to database
+            usersDatabase.ref().child("users").child(uid).set({ 
+                interests: interests
+            });
             $("#interestInput").val("");
             $("#interestInput").attr("placeholder", "tell me your interest");
             renderButton();
@@ -130,6 +110,10 @@ $(document).ready(function() {
     function closeInterest() {
         var index = interests.indexOf($(this).parent().attr("data-name"));
         interests.splice(index, 1);
+        //wipe array from database and push new array to database
+        usersDatabase.ref().child("users").child(uid).set({ 
+            interests: interests
+        });
         $("#map").html($("<p style='margin-top: 25px'>Click on an interest to find things to do with people near you!</p>"));
         renderButton();
         if (interests.indexOf(currentInterest) !== -1) {
@@ -151,7 +135,7 @@ $(document).ready(function() {
         }
     };
 
-
+    //TODO change this to listen to changes in people's interstes rather than users added
     function checkDatabase() {
         usersDatabase.ref("/users").on("child_added", function(snap) {
             var len = snap.numChildren();
@@ -164,8 +148,9 @@ $(document).ready(function() {
             }
             console.log("Key = " + key + " Name = " + name);
             console.log(interestList);
+
         });
-    };
+    };  
 
     function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
