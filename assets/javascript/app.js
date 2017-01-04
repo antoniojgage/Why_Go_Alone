@@ -11,7 +11,8 @@ $(document).ready(function() {
     };
     var usersApp = firebase.initializeApp(config, "users-database");
 
-    var usersDatabase = usersApp.database("/users");
+    var usersDatabase = "https://why-go-alone.firebaseio.com/users";
+
     //array of interests
     var interests = ["pizza", "movie", "bowling"];
     var map;
