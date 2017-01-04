@@ -41,7 +41,7 @@ $(document).ready(function() {
         if (doesNotExist) {
             usersDatabase.ref().child("users").child(uid).set({ 
                 name: user_name, 
-                interests: ["pizza", "movie", "bowling"] 
+                interests: ["Pizza", "Movie", "Bowling"] 
             });
         } else {
             console.log('user ' + uid + 'already exists!');
@@ -90,6 +90,8 @@ $(document).ready(function() {
 
         //takes the input from the user typed in
         var currentInterest = $("#interestInput").val().trim();
+        currentInterest.toUpperCase();
+        console.log(currentInterest);
 
         console.log(currentInterest + " is added to the Array");
         if (currentInterest != "") {
