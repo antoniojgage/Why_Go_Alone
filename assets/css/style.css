@@ -24,6 +24,8 @@ html {
 	background-color: #fe5d26;
 	font-weight: bold;
 	border-color: #fe5d26;
+	padding: 2%;
+	margin: 2%;
 }
 
 .mdl-layout__header{
@@ -48,13 +50,13 @@ html {
 	color: white;
 }
 h2{
-	font-family: 'Gloria Hallelujah', cursive;
+	font-family: 'Fredoka One', cursive;
 	font-weight: bold;
 }
 
 h4{
 	color: white;
-	font-family: 'Gloria Hallelujah', cursive;
+	font-family: 'Fredoka One', cursive;
 }
 
 .panel-body{
@@ -74,7 +76,7 @@ p {
 	margin-top: 25px;
 }
 #interestInput{
-	font-family: 'Gloria Hallelujah', cursive;
+	font-family: 'Fredoka One', cursive;
 }
 
 #btnBox{
