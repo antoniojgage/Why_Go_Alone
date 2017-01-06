@@ -35,7 +35,6 @@ $(document).ready(function() {
                 interests: ["PIZZA", "MOVIE", "BOWLING"] 
             });
         } else {
-            console.log('user ' + uid + 'already exists!');
             usersDatabase.ref().child("users").child(uid).on('value', function(snapshot) {
                 interests = snapshot.val().interests;
                 renderButton();
@@ -45,7 +44,6 @@ $(document).ready(function() {
     //If there is a logout or login activity there will be a check to see if a user is logged in and calls the create user function.
     firebase.auth().onAuthStateChanged(function(currentUser) {
         if (currentUser) {
-            console.log("there is a user");
             uid = currentUser.uid;
             user_name = currentUser.displayName;
             usersDatabase.ref().child("users").child(uid).on('value', function(snapshot) {
