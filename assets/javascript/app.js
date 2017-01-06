@@ -77,7 +77,7 @@ $(document).ready(function() {
                 interests: interests
             });
             $("#interestInput").val("");
-            $("#interestInput").attr("placeholder", "tell me your interest");
+            $("#interestInput").attr("placeholder", "e.g. Shopping, Karoke");
             renderButton();
         } else {
             return;
