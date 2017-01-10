@@ -148,7 +148,8 @@ Responsive navbar-brand image CSS
 
 .navbar-brand>img {
     height: 100%;
-    padding: 15px;
+    /*    padding: 15px;
+*/
     width: auto;
 }
 
@@ -166,6 +167,10 @@ EXAMPLES 2-7 BELOW
 
 .orange {
     background-color: #fe5d26;
+}
+
+.navbar-right {
+    padding-top: 20px;
 }
 
 
