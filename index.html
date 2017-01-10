@@ -47,8 +47,36 @@
 </head>
 
 <body>
+    <!-- example style -->
+    <div class="example3">
+        <nav class="navbar navbar-inverse navbar-static-top orange">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="http://whygoalone.com"><img src="assets/images/pizzalogo.png" alt="Why Go Alone">
+                    </a>
+                </div>
+                <div id="navbar3">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <div hidden id="user-pic"></div>
+                            <div hidden id="user-name"></div>
+                            <button hidden id="sign-out" class="mdl-button mdl-js-button mdl-js-ripple-effect">
+                                Sign-out
+                            </button>
+                            <button hidden id="sign-in" class="mdl-button mdl-js-button mdl-js-ripple-effect">
+                                <i class="material-icons">account_circle</i>Sign-in with Google
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+                <!--/.nav-collapse -->
+            </div>
+            <!--/.container-fluid -->
+        </nav>
+    </div>
+    <!-- end example -->
     <!-- Header section containing logo -->
-    <header class="mdl-layout_header">
+    <!--     <header class="mdl-layout_header">
         <div class="container">
             <div class="row">
                 <div class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-grid" id="logoArea">
@@ -68,9 +96,9 @@
                 </div>
             </div>
         </div>
-    </header>
+    </header> -->
     <!-- Header section containing logo -->
-<!-- <header class="mdl-layout_header">
+    <!-- <header class="mdl-layout_header">
     <div class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-grid" id="logoArea">
         <div class="mdl-layout__header-row mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-desktop">
             <h2><img id="pizzaImg" src="assets/images/pizzalogo.png"></h2>
@@ -170,7 +198,7 @@
         </div>
         <!--end of row -->
         <!-- footer -->
-        <footer class="navbar navbar-inverse navbar-fixed-bottom">
+        <footer class="navbar navbar-inverse orange">
             <div class="container-fluid">
                 <a>@ Copyright 2016 whygoalone.com</a>
             </div>
