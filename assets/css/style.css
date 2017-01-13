@@ -30,9 +30,7 @@
     height: 140px;
 }
 
-#user-container {
-    margin: 50px;
-}
+#user-container {}
 
 #map {
     height: 500px;
