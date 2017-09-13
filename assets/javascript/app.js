@@ -3,11 +3,7 @@ $(document).ready(function() {
 
     // Initialize Firebase
     var config = {
-        apiKey: "AIzaSyByWTJGeG8HO1UyH2pubvp022Q2AXvJc88",
-        authDomain: "why-go-alone.firebaseapp.com",
-        databaseURL: "https://why-go-alone.firebaseio.com",
-        storageBucket: "why-go-alone.appspot.com",
-        messagingSenderId: "141733030000"
+        //ARGG Wheres me API.
     };
     // The second argument to initialize app differentiates this database from Friendly Chat.
     var usersApp = firebase.initializeApp(config, "users-database");
